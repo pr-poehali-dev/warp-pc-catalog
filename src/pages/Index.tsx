@@ -7,6 +7,7 @@ import { Badge } from '@/components/ui/badge';
 import Icon from '@/components/ui/icon';
 import { ThemeToggle } from '@/components/ThemeToggle';
 import { useScrollAnimation } from '@/hooks/useScrollAnimation';
+import ParallaxBackground from '@/components/ParallaxBackground';
 
 const Index = () => {
   const [activeSection, setActiveSection] = useState('home');
@@ -114,8 +115,9 @@ const Index = () => {
         </div>
       </nav>
 
-      <section id="home" className="pt-32 pb-20 px-4">
-        <div className="container mx-auto">
+      <section id="home" className="pt-32 pb-20 px-4 relative overflow-hidden">
+        <ParallaxBackground />
+        <div className="container mx-auto relative z-10">
           <div className="max-w-4xl mx-auto text-center animate-fade-in">
             <h1 className="text-5xl md:text-7xl font-bold mb-6 leading-tight">
               Воплощаем <span className="text-primary">любые идеи</span> в мире компьютеров
