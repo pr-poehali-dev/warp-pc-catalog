@@ -8,8 +8,10 @@ import Icon from '@/components/ui/icon';
 import { ThemeToggle } from '@/components/ThemeToggle';
 import { useScrollAnimation } from '@/hooks/useScrollAnimation';
 import ParallaxBackground from '@/components/ParallaxBackground';
+import { useNavigate } from 'react-router-dom';
 
 const Index = () => {
+  const navigate = useNavigate();
   const [activeSection, setActiveSection] = useState('home');
   const featuresRef = useScrollAnimation();
   const catalogRef = useScrollAnimation();
@@ -206,6 +208,17 @@ const Index = () => {
                 </CardContent>
               </Card>
             ))}
+          </div>
+
+          <div className="text-center mt-12">
+            <Button 
+              size="lg" 
+              className="button-hover text-lg"
+              onClick={() => navigate('/catalog')}
+            >
+              <Icon name="Grid3x3" size={20} className="mr-2" />
+              Показать все компьютеры
+            </Button>
           </div>
         </div>
       </section>
