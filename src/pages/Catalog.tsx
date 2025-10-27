@@ -163,9 +163,9 @@ const Catalog = () => {
           <div className="flex items-center justify-between">
             <button 
               onClick={() => navigate('/')}
-              className="flex items-center gap-1 md:gap-2 hover:opacity-80 transition-opacity"
+              className="flex items-center gap-1 md:gap-3 hover:opacity-80 transition-opacity"
             >
-              <Icon name="Rocket" size={16} className="text-primary md:w-7 md:h-7" />
+              <img src="https://cdn.poehali.dev/files/1a63eeaa-f3cc-46a8-a560-65d427484deb.png" alt="WAPC Logo" className="h-7 w-7 md:h-10 md:w-10 object-contain" />
               <span className="text-base md:text-2xl font-bold">WarpPC</span>
             </button>
             <div className="flex items-center gap-1 md:gap-3">

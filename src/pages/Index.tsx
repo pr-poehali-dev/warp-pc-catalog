@@ -87,8 +87,8 @@ const Index = () => {
       <nav className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-md border-b border-border">
         <div className="container mx-auto px-4 py-4">
           <div className="flex items-center justify-between">
-            <div className="flex items-center gap-2">
-              <Icon name="Rocket" size={28} className="text-primary" />
+            <div className="flex items-center gap-3">
+              <img src="https://cdn.poehali.dev/files/1a63eeaa-f3cc-46a8-a560-65d427484deb.png" alt="WAPC Logo" className="h-10 w-10 object-contain" />
               <span className="text-2xl font-bold">WarpPC</span>
             </div>
             <div className="hidden md:flex items-center gap-8">
