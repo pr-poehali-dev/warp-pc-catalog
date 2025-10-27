@@ -328,4 +328,116 @@
   .scrollbar-hide::-webkit-scrollbar {
     display: none;
   }
+
+  @keyframes scroll-fly-in-1 {
+    0% {
+      opacity: 0;
+      transform: translateY(100px) translateX(-50px) rotate(-15deg) scale(0.7);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0) translateX(0) rotate(0deg) scale(1);
+    }
+  }
+
+  @keyframes scroll-fly-in-2 {
+    0% {
+      opacity: 0;
+      transform: translateY(100px) translateX(50px) rotate(15deg) scale(0.7);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0) translateX(0) rotate(0deg) scale(1);
+    }
+  }
+
+  @keyframes scroll-fly-in-3 {
+    0% {
+      opacity: 0;
+      transform: translateY(120px) rotate(-20deg) scale(0.5);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0) rotate(0deg) scale(1);
+    }
+  }
+
+  @keyframes scroll-fly-in-4 {
+    0% {
+      opacity: 0;
+      transform: translateY(120px) rotate(20deg) scale(0.5);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0) rotate(0deg) scale(1);
+    }
+  }
+
+  @keyframes scroll-spin-in {
+    0% {
+      opacity: 0;
+      transform: rotate(360deg) scale(0);
+    }
+    100% {
+      opacity: 1;
+      transform: rotate(0deg) scale(1);
+    }
+  }
+
+  .scroll-animate-card {
+    opacity: 0;
+    transform: translateY(100px) rotate(-15deg) scale(0.7);
+  }
+
+  .scroll-animate-card.visible {
+    animation-duration: 0.8s;
+    animation-fill-mode: forwards;
+    animation-timing-function: cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+
+  .scroll-animate-card[style*="--card-index: 0"].visible {
+    animation-name: scroll-fly-in-1;
+  }
+
+  .scroll-animate-card[style*="--card-index: 1"].visible {
+    animation-name: scroll-fly-in-2;
+  }
+
+  .scroll-animate-card[style*="--card-index: 2"].visible {
+    animation-name: scroll-fly-in-3;
+  }
+
+  .scroll-animate-card[style*="--card-index: 3"].visible {
+    animation-name: scroll-fly-in-4;
+  }
+
+  @keyframes spin-slow {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+
+  .animate-spin-slow {
+    animation: spin-slow 20s linear infinite;
+  }
+
+  @keyframes wiggle {
+    0%,
+    100% {
+      transform: rotate(0deg);
+    }
+    25% {
+      transform: rotate(5deg);
+    }
+    75% {
+      transform: rotate(-5deg);
+    }
+  }
+
+  .group:hover .group-hover\:animate-wiggle {
+    animation: wiggle 0.5s ease-in-out infinite;
+  }
 }

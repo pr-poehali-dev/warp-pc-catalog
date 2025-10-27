@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
@@ -10,6 +10,7 @@ const Catalog = () => {
   const navigate = useNavigate();
   const [selectedCategory, setSelectedCategory] = useState('all');
   const [animateCards, setAnimateCards] = useState(false);
+  const cardsRef = useRef<(HTMLDivElement | null)[]>([]);
 
   const allComputers = [
     {
@@ -128,6 +129,32 @@ const Catalog = () => {
     return () => clearTimeout(timer);
   }, [selectedCategory]);
 
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+          }
+        });
+      },
+      {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+      }
+    );
+
+    cardsRef.current.forEach((card) => {
+      if (card) observer.observe(card);
+    });
+
+    return () => {
+      cardsRef.current.forEach((card) => {
+        if (card) observer.unobserve(card);
+      });
+    };
+  }, [filteredComputers]);
+
   return (
     <div className="min-h-screen bg-background">
       {/* Mobile Compact Nav */}
@@ -192,10 +219,14 @@ const Catalog = () => {
             {filteredComputers.map((computer, index) => (
               <Card 
                 key={`${computer.id}-${selectedCategory}`}
-                className={`overflow-hidden group card-hover hover-shimmer relative border ${
+                ref={(el) => (cardsRef.current[index] = el)}
+                className={`overflow-hidden group card-hover hover-shimmer relative border scroll-animate-card ${
                   animateCards ? 'animate-fade-in' : 'opacity-0'
                 }`}
-                style={{ animationDelay: `${index * 0.08}s` }}
+                style={{ 
+                  animationDelay: `${index * 0.08}s`,
+                  '--card-index': index % 4
+                } as React.CSSProperties}
               >
                 <div className="absolute -top-10 -right-10 w-20 h-20 md:-top-20 md:-right-20 md:w-40 md:h-40 bg-primary/10 rounded-full blur-2xl group-hover:bg-primary/30 transition-all duration-700 animate-pulse-slow" />
                 <div className="absolute -bottom-10 -left-10 w-20 h-20 md:-bottom-20 md:-left-20 md:w-40 md:h-40 bg-destructive/10 rounded-full blur-2xl group-hover:bg-destructive/30 transition-all duration-700 animate-pulse-slow" style={{animationDelay: '1s'}} />
@@ -207,17 +238,17 @@ const Catalog = () => {
                   <img 
                     src={computer.image} 
                     alt={computer.name}
-                    className="w-full h-full object-cover group-hover:scale-125 group-hover:rotate-3 transition-all duration-700 filter group-hover:brightness-110"
+                    className="w-full h-full object-cover group-hover:scale-150 group-hover:rotate-6 transition-all duration-700 filter group-hover:brightness-110"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                   <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
                     <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full bg-gradient-radial from-primary/20 to-transparent blur-xl animate-pulse-glow" />
                   </div>
-                  <Badge className="absolute top-1 right-1 md:top-4 md:right-4 text-[8px] md:text-sm bg-primary/90 backdrop-blur-sm shadow-lg group-hover:scale-125 group-hover:rotate-12 group-hover:shadow-primary/50 transition-all duration-500 px-1 py-0 md:px-2 md:py-1">
+                  <Badge className="absolute top-1 right-1 md:top-4 md:right-4 text-[8px] md:text-sm bg-primary/90 backdrop-blur-sm shadow-lg group-hover:scale-150 group-hover:rotate-[360deg] group-hover:shadow-primary/50 transition-all duration-700 px-1 py-0 md:px-2 md:py-1">
                     {computer.category}
                   </Badge>
-                  <div className="absolute top-1 left-1 md:top-4 md:left-4 w-6 h-6 md:w-10 md:h-10 rounded-full bg-primary/20 backdrop-blur-sm opacity-0 group-hover:opacity-100 transition-all duration-500 flex items-center justify-center">
-                    <Icon name="Zap" size={12} className="text-primary animate-pulse md:w-4 md:h-4" />
+                  <div className="absolute top-1 left-1 md:top-4 md:left-4 w-6 h-6 md:w-10 md:h-10 rounded-full bg-primary/20 backdrop-blur-sm opacity-0 group-hover:opacity-100 transition-all duration-500 flex items-center justify-center group-hover:animate-bounce">
+                    <Icon name="Zap" size={12} className="text-primary animate-pulse md:w-4 md:h-4 group-hover:rotate-180 transition-transform duration-500" />
                   </div>
                 </div>
 
@@ -227,7 +258,7 @@ const Catalog = () => {
                   <div className="absolute top-0 right-0 w-0.5 md:w-1 h-0 bg-gradient-to-b from-primary to-destructive group-hover:h-full transition-all duration-1000 delay-300" />
                   
                   {/* Mobile Compact Title */}
-                  <h3 className="text-[10px] leading-tight md:text-xl font-bold mb-1 md:mb-3 group-hover:text-primary transition-all duration-500 group-hover:translate-x-1 line-clamp-1">
+                  <h3 className="text-[10px] leading-tight md:text-xl font-bold mb-1 md:mb-3 group-hover:text-primary transition-all duration-500 group-hover:translate-x-2 group-hover:scale-105 line-clamp-1">
                     {computer.name}
                   </h3>
                   
@@ -239,7 +270,7 @@ const Catalog = () => {
                         className="text-[8px] md:text-sm text-muted-foreground flex items-start gap-0.5 md:gap-2 opacity-60 group-hover:opacity-100 transition-all duration-300 group-hover:translate-x-1"
                         style={{ transitionDelay: `${idx * 0.1}s` }}
                       >
-                        <Icon name="Check" size={8} className="text-primary group-hover:scale-125 group-hover:rotate-12 transition-all duration-300 flex-shrink-0 mt-0.5 md:w-3.5 md:h-3.5" />
+                        <Icon name="Check" size={8} className="text-primary group-hover:scale-150 group-hover:rotate-[360deg] transition-all duration-500 flex-shrink-0 mt-0.5 md:w-3.5 md:h-3.5" />
                         <span className="group-hover:text-foreground transition-colors duration-300 line-clamp-1">{spec}</span>
                       </li>
                     ))}
@@ -250,7 +281,7 @@ const Catalog = () => {
                         className="hidden md:flex text-sm text-muted-foreground items-start gap-2 opacity-60 group-hover:opacity-100 transition-all duration-300 group-hover:translate-x-2"
                         style={{ transitionDelay: `${(idx + 2) * 0.1}s` }}
                       >
-                        <Icon name="Check" size={14} className="text-primary group-hover:scale-125 group-hover:rotate-12 transition-all duration-300 flex-shrink-0 mt-0.5" />
+                        <Icon name="Check" size={14} className="text-primary group-hover:scale-150 group-hover:rotate-[360deg] transition-all duration-500 flex-shrink-0 mt-0.5" />
                         <span className="group-hover:text-foreground transition-colors duration-300 line-clamp-1">{spec}</span>
                       </li>
                     ))}
@@ -258,12 +289,12 @@ const Catalog = () => {
                   
                   {/* Mobile Compact Price & Button */}
                   <div className="flex items-center justify-between pt-1 md:pt-4 border-t border-border/50 group-hover:border-primary/50 transition-colors duration-500">
-                    <span className="text-xs md:text-2xl font-bold text-primary group-hover:scale-110 md:group-hover:scale-125 transition-all duration-500 inline-block relative">
+                    <span className="text-xs md:text-2xl font-bold text-primary group-hover:scale-125 md:group-hover:scale-150 transition-all duration-700 inline-block relative group-hover:rotate-3">
                       <span className="absolute inset-0 blur-lg bg-primary/50 opacity-0 group-hover:opacity-100 transition-opacity duration-500 animate-pulse" />
                       <span className="relative animate-gradient bg-gradient-to-r from-primary via-destructive to-primary bg-clip-text bg-300">{computer.price}</span>
                     </span>
-                    <Button size="sm" className="button-hover group-hover:scale-110 transition-all duration-300 text-[9px] md:text-sm shadow-lg group-hover:shadow-primary/50 h-5 px-1.5 md:h-9 md:px-4">
-                      <Icon name="ShoppingCart" size={10} className="group-hover:rotate-12 group-hover:scale-125 transition-all duration-300 md:mr-2 md:w-3.5 md:h-3.5" />
+                    <Button size="sm" className="button-hover group-hover:scale-125 group-hover:-rotate-3 transition-all duration-500 text-[9px] md:text-sm shadow-lg group-hover:shadow-primary/50 h-5 px-1.5 md:h-9 md:px-4">
+                      <Icon name="ShoppingCart" size={10} className="group-hover:rotate-[360deg] group-hover:scale-150 transition-all duration-700 md:mr-2 md:w-3.5 md:h-3.5" />
                       <span className="hidden md:inline">Заказать</span>
                     </Button>
                   </div>
