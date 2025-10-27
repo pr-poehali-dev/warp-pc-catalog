@@ -139,10 +139,10 @@ const Index = () => {
             {features.map((feature, index) => (
               <Card 
                 key={index} 
-                className={`border-2 hover:border-primary transition-all duration-300 hover:shadow-lg ${
-                  featuresRef.isVisible ? 'animate-fade-in-up' : 'opacity-0'
+                className={`border-2 hover:border-primary hover:shadow-lg animate-on-scroll ${
+                  featuresRef.isVisible ? 'visible' : ''
                 }`}
-                style={{ animationDelay: `${index * 0.1}s` }}
+                style={{ transitionDelay: `${index * 0.1}s` }}
               >
                 <CardContent className="p-6">
                   <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center mb-4">
@@ -159,8 +159,8 @@ const Index = () => {
 
       <section id="catalog" className="py-20 px-4 bg-muted/30">
         <div className="container mx-auto">
-          <div ref={catalogRef.ref} className={`text-center mb-12 ${
-            catalogRef.isVisible ? 'animate-fade-in-up' : 'opacity-0'
+          <div ref={catalogRef.ref} className={`text-center mb-12 animate-on-scroll ${
+            catalogRef.isVisible ? 'visible' : ''
           }`}>
             <h2 className="text-4xl md:text-5xl font-bold mb-4">Каталог компьютеров</h2>
             <p className="text-xl text-muted-foreground">Выберите готовую конфигурацию или закажите индивидуальную сборку</p>
@@ -170,10 +170,10 @@ const Index = () => {
             {computers.map((computer, index) => (
               <Card 
                 key={computer.id} 
-                className={`overflow-hidden group hover:shadow-xl transition-all duration-300 ${
-                  catalogRef.isVisible ? 'animate-scale-in' : 'opacity-0'
+                className={`overflow-hidden group hover:shadow-xl animate-on-scroll-scale ${
+                  catalogRef.isVisible ? 'visible' : ''
                 }`}
-                style={{ animationDelay: `${index * 0.15}s` }}
+                style={{ transitionDelay: `${index * 0.15}s` }}
               >
                 <div className="relative overflow-hidden h-48">
                   <img 
@@ -209,14 +209,14 @@ const Index = () => {
 
       <section id="about" className="py-20 px-4">
         <div className="container mx-auto max-w-4xl">
-          <div ref={aboutRef.ref} className={`text-center mb-12 ${
-            aboutRef.isVisible ? 'animate-fade-in-up' : 'opacity-0'
+          <div ref={aboutRef.ref} className={`text-center mb-12 animate-on-scroll ${
+            aboutRef.isVisible ? 'visible' : ''
           }`}>
             <h2 className="text-4xl md:text-5xl font-bold mb-4">О нас</h2>
           </div>
-          <Card className={`border-2 ${
-            aboutRef.isVisible ? 'animate-fade-in-up' : 'opacity-0'
-          }`} style={{ animationDelay: '0.2s' }}>
+          <Card className={`border-2 animate-on-scroll ${
+            aboutRef.isVisible ? 'visible' : ''
+          }`} style={{ transitionDelay: '0.2s' }}>
             <CardContent className="p-8 md:p-12">
               <div className="space-y-6 text-lg text-muted-foreground">
                 <p>
@@ -247,16 +247,16 @@ const Index = () => {
 
       <section id="contacts" className="py-20 px-4 bg-muted/30">
         <div className="container mx-auto max-w-2xl">
-          <div ref={contactsRef.ref} className={`text-center mb-12 ${
-            contactsRef.isVisible ? 'animate-fade-in-up' : 'opacity-0'
+          <div ref={contactsRef.ref} className={`text-center mb-12 animate-on-scroll ${
+            contactsRef.isVisible ? 'visible' : ''
           }`}>
             <h2 className="text-4xl md:text-5xl font-bold mb-4">Контакты</h2>
             <p className="text-xl text-muted-foreground">Свяжитесь с нами удобным способом</p>
           </div>
 
-          <Card className={`border-2 ${
-            contactsRef.isVisible ? 'animate-scale-in' : 'opacity-0'
-          }`} style={{ animationDelay: '0.2s' }}>
+          <Card className={`border-2 animate-on-scroll-scale ${
+            contactsRef.isVisible ? 'visible' : ''
+          }`} style={{ transitionDelay: '0.2s' }}>
             <CardContent className="p-8">
               <form className="space-y-6">
                 <div>
