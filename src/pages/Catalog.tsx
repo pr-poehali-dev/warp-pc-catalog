@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
@@ -9,6 +9,7 @@ import { useNavigate } from 'react-router-dom';
 const Catalog = () => {
   const navigate = useNavigate();
   const [selectedCategory, setSelectedCategory] = useState('all');
+  const [animateCards, setAnimateCards] = useState(false);
 
   const allComputers = [
     {
@@ -121,6 +122,12 @@ const Catalog = () => {
     ? allComputers 
     : allComputers.filter(c => c.category === selectedCategory);
 
+  useEffect(() => {
+    setAnimateCards(false);
+    const timer = setTimeout(() => setAnimateCards(true), 50);
+    return () => clearTimeout(timer);
+  }, [selectedCategory]);
+
   return (
     <div className="min-h-screen bg-background">
       <nav className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-md border-b border-border">
@@ -146,18 +153,24 @@ const Catalog = () => {
 
       <div className="pt-24 pb-20 px-4">
         <div className="container mx-auto">
-          <div className="text-center mb-12 animate-fade-in">
-            <h1 className="text-4xl md:text-6xl font-bold mb-4">Полный каталог</h1>
+          <div className="text-center mb-12 animate-fade-in relative">
+            <div className="absolute inset-0 -z-10">
+              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-primary/5 rounded-full blur-3xl animate-pulse" />
+            </div>
+            <h1 className="text-4xl md:text-6xl font-bold mb-4 bg-gradient-to-r from-primary via-primary to-destructive bg-clip-text text-transparent">
+              Полный каталог
+            </h1>
             <p className="text-xl text-muted-foreground">Все наши конфигурации компьютеров в одном месте</p>
           </div>
 
           <div className="flex flex-wrap gap-3 justify-center mb-12">
-            {categories.map((category) => (
+            {categories.map((category, idx) => (
               <Button
                 key={category.id}
                 variant={selectedCategory === category.id ? 'default' : 'outline'}
                 onClick={() => setSelectedCategory(category.id)}
-                className="button-hover"
+                className="button-hover animate-fade-in"
+                style={{ animationDelay: `${idx * 0.1}s` }}
               >
                 <Icon name={category.icon} size={18} className="mr-2" />
                 {category.name}
@@ -168,39 +181,52 @@ const Catalog = () => {
           <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
             {filteredComputers.map((computer, index) => (
               <Card 
-                key={computer.id} 
-                className="overflow-hidden group card-hover hover-shimmer animate-fade-in"
-                style={{ animationDelay: `${index * 0.05}s` }}
+                key={`${computer.id}-${selectedCategory}`}
+                className={`overflow-hidden group card-hover hover-shimmer relative ${
+                  animateCards ? 'animate-fade-in' : 'opacity-0'
+                }`}
+                style={{ animationDelay: `${index * 0.08}s` }}
               >
+                <div className="absolute -top-20 -right-20 w-40 h-40 bg-primary/10 rounded-full blur-2xl group-hover:bg-primary/20 transition-all duration-700" />
                 <div className="relative overflow-hidden h-48 bg-gradient-to-br from-muted to-background">
+                  <div className="absolute inset-0 bg-gradient-to-r from-primary/20 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-500 animate-shimmer" />
                   <img 
                     src={computer.image} 
                     alt={computer.name}
-                    className="w-full h-full object-cover group-hover:scale-110 group-hover:rotate-2 transition-all duration-500"
+                    className="w-full h-full object-cover group-hover:scale-125 group-hover:rotate-3 transition-all duration-700"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                  <Badge className="absolute top-4 right-4 bg-primary shadow-lg group-hover:scale-110 transition-transform duration-300">
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                  <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                    <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full bg-primary/10 blur-xl" />
+                  </div>
+                  <Badge className="absolute top-4 right-4 bg-primary/90 backdrop-blur-sm shadow-lg group-hover:scale-125 group-hover:rotate-12 transition-all duration-500">
                     {computer.category}
                   </Badge>
                 </div>
-                <CardContent className="p-6">
-                  <h3 className="text-xl font-bold mb-3 group-hover:text-primary transition-colors duration-300">
+                <CardContent className="p-6 relative">
+                  <div className="absolute top-0 left-0 w-0 h-1 bg-gradient-to-r from-primary to-destructive group-hover:w-full transition-all duration-700" />
+                  <h3 className="text-xl font-bold mb-3 group-hover:text-primary transition-all duration-500 group-hover:translate-x-2">
                     {computer.name}
                   </h3>
                   <ul className="space-y-2 mb-4">
                     {computer.specs.map((spec, idx) => (
-                      <li key={idx} className="text-sm text-muted-foreground flex items-center gap-2">
-                        <Icon name="Check" size={16} className="text-primary" />
-                        {spec}
+                      <li 
+                        key={idx} 
+                        className="text-sm text-muted-foreground flex items-center gap-2 opacity-0 group-hover:opacity-100 transition-all duration-300 group-hover:translate-x-2"
+                        style={{ transitionDelay: `${idx * 0.1}s` }}
+                      >
+                        <Icon name="Check" size={16} className="text-primary group-hover:scale-125 transition-transform duration-300" />
+                        <span className="group-hover:text-foreground transition-colors duration-300">{spec}</span>
                       </li>
                     ))}
                   </ul>
-                  <div className="flex items-center justify-between pt-4 border-t">
-                    <span className="text-2xl font-bold text-primary group-hover:scale-110 transition-transform duration-300 inline-block">
-                      {computer.price}
+                  <div className="flex items-center justify-between pt-4 border-t border-border/50 group-hover:border-primary/50 transition-colors duration-500">
+                    <span className="text-2xl font-bold text-primary group-hover:scale-125 transition-all duration-500 inline-block relative">
+                      <span className="absolute inset-0 blur-lg bg-primary/50 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                      <span className="relative">{computer.price}</span>
                     </span>
-                    <Button size="sm" className="button-hover">
-                      <Icon name="ShoppingCart" size={16} className="mr-2" />
+                    <Button size="sm" className="button-hover group-hover:scale-110 transition-transform duration-300">
+                      <Icon name="ShoppingCart" size={16} className="mr-2 group-hover:rotate-12 transition-transform duration-300" />
                       Заказать
                     </Button>
                   </div>
