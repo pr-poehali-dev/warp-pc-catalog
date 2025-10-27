@@ -440,4 +440,35 @@
   .group:hover .group-hover\:animate-wiggle {
     animation: wiggle 0.5s ease-in-out infinite;
   }
+
+  @keyframes scale-in {
+    0% {
+      opacity: 0;
+      transform: scale(0.5) rotate(-180deg);
+    }
+    50% {
+      transform: scale(1.1) rotate(10deg);
+    }
+    100% {
+      opacity: 1;
+      transform: scale(1) rotate(0deg);
+    }
+  }
+
+  @keyframes spin-slow-reverse {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(-360deg);
+    }
+  }
+
+  .animate-scale-in {
+    animation: scale-in 1.2s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+  }
+
+  .animate-spin-slow-reverse {
+    animation: spin-slow-reverse 6s linear infinite;
+  }
 }
