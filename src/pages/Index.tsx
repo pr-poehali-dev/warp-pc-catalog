@@ -5,6 +5,7 @@ import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Badge } from '@/components/ui/badge';
 import Icon from '@/components/ui/icon';
+import { ThemeToggle } from '@/components/ThemeToggle';
 
 const Index = () => {
   const [activeSection, setActiveSection] = useState('home');
@@ -98,9 +99,12 @@ const Index = () => {
                 </button>
               ))}
             </div>
-            <Button onClick={() => scrollToSection('contacts')}>
-              Связаться
-            </Button>
+            <div className="flex items-center gap-3">
+              <ThemeToggle />
+              <Button onClick={() => scrollToSection('contacts')}>
+                Связаться
+              </Button>
+            </div>
           </div>
         </div>
       </nav>
