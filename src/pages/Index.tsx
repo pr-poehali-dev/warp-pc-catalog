@@ -6,9 +6,14 @@ import { Textarea } from '@/components/ui/textarea';
 import { Badge } from '@/components/ui/badge';
 import Icon from '@/components/ui/icon';
 import { ThemeToggle } from '@/components/ThemeToggle';
+import { useScrollAnimation } from '@/hooks/useScrollAnimation';
 
 const Index = () => {
   const [activeSection, setActiveSection] = useState('home');
+  const featuresRef = useScrollAnimation();
+  const catalogRef = useScrollAnimation();
+  const aboutRef = useScrollAnimation();
+  const contactsRef = useScrollAnimation();
 
   const computers = [
     {
@@ -130,9 +135,15 @@ const Index = () => {
             </div>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mt-20">
+          <div ref={featuresRef.ref} className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mt-20">
             {features.map((feature, index) => (
-              <Card key={index} className="border-2 hover:border-primary transition-all duration-300 hover:shadow-lg">
+              <Card 
+                key={index} 
+                className={`border-2 hover:border-primary transition-all duration-300 hover:shadow-lg ${
+                  featuresRef.isVisible ? 'animate-fade-in-up' : 'opacity-0'
+                }`}
+                style={{ animationDelay: `${index * 0.1}s` }}
+              >
                 <CardContent className="p-6">
                   <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center mb-4">
                     <Icon name={feature.icon} size={24} className="text-primary" />
@@ -148,14 +159,22 @@ const Index = () => {
 
       <section id="catalog" className="py-20 px-4 bg-muted/30">
         <div className="container mx-auto">
-          <div className="text-center mb-12">
+          <div ref={catalogRef.ref} className={`text-center mb-12 ${
+            catalogRef.isVisible ? 'animate-fade-in-up' : 'opacity-0'
+          }`}>
             <h2 className="text-4xl md:text-5xl font-bold mb-4">Каталог компьютеров</h2>
             <p className="text-xl text-muted-foreground">Выберите готовую конфигурацию или закажите индивидуальную сборку</p>
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {computers.map((computer) => (
-              <Card key={computer.id} className="overflow-hidden group hover:shadow-xl transition-all duration-300">
+            {computers.map((computer, index) => (
+              <Card 
+                key={computer.id} 
+                className={`overflow-hidden group hover:shadow-xl transition-all duration-300 ${
+                  catalogRef.isVisible ? 'animate-scale-in' : 'opacity-0'
+                }`}
+                style={{ animationDelay: `${index * 0.15}s` }}
+              >
                 <div className="relative overflow-hidden h-48">
                   <img 
                     src={computer.image} 
@@ -190,10 +209,14 @@ const Index = () => {
 
       <section id="about" className="py-20 px-4">
         <div className="container mx-auto max-w-4xl">
-          <div className="text-center mb-12">
+          <div ref={aboutRef.ref} className={`text-center mb-12 ${
+            aboutRef.isVisible ? 'animate-fade-in-up' : 'opacity-0'
+          }`}>
             <h2 className="text-4xl md:text-5xl font-bold mb-4">О нас</h2>
           </div>
-          <Card className="border-2">
+          <Card className={`border-2 ${
+            aboutRef.isVisible ? 'animate-fade-in-up' : 'opacity-0'
+          }`} style={{ animationDelay: '0.2s' }}>
             <CardContent className="p-8 md:p-12">
               <div className="space-y-6 text-lg text-muted-foreground">
                 <p>
@@ -224,12 +247,16 @@ const Index = () => {
 
       <section id="contacts" className="py-20 px-4 bg-muted/30">
         <div className="container mx-auto max-w-2xl">
-          <div className="text-center mb-12">
+          <div ref={contactsRef.ref} className={`text-center mb-12 ${
+            contactsRef.isVisible ? 'animate-fade-in-up' : 'opacity-0'
+          }`}>
             <h2 className="text-4xl md:text-5xl font-bold mb-4">Контакты</h2>
             <p className="text-xl text-muted-foreground">Свяжитесь с нами удобным способом</p>
           </div>
 
-          <Card className="border-2">
+          <Card className={`border-2 ${
+            contactsRef.isVisible ? 'animate-scale-in' : 'opacity-0'
+          }`} style={{ animationDelay: '0.2s' }}>
             <CardContent className="p-8">
               <form className="space-y-6">
                 <div>
