@@ -6,15 +6,12 @@ import { Textarea } from '@/components/ui/textarea';
 import { Badge } from '@/components/ui/badge';
 import Icon from '@/components/ui/icon';
 import { ThemeToggle } from '@/components/ThemeToggle';
-import { SoundToggle } from '@/components/SoundToggle';
 import { useScrollAnimation } from '@/hooks/useScrollAnimation';
-import { useSound } from '@/hooks/useSound';
 import ParallaxBackground from '@/components/ParallaxBackground';
 import { useNavigate } from 'react-router-dom';
 
 const Index = () => {
   const navigate = useNavigate();
-  const { play } = useSound();
   const [activeSection, setActiveSection] = useState('home');
   const featuresRef = useScrollAnimation();
   const catalogRef = useScrollAnimation();
@@ -80,7 +77,6 @@ const Index = () => {
   ];
 
   const scrollToSection = (section: string) => {
-    play('whoosh');
     setActiveSection(section);
     const element = document.getElementById(section);
     element?.scrollIntoView({ behavior: 'smooth' });
@@ -100,7 +96,6 @@ const Index = () => {
                 <button
                   key={section}
                   onClick={() => scrollToSection(section)}
-                  onMouseEnter={() => play('hover')}
                   className={`text-sm font-medium transition-colors hover:text-primary ${
                     activeSection === section ? 'text-primary' : 'text-muted-foreground'
                   }`}
@@ -113,9 +108,8 @@ const Index = () => {
               ))}
             </div>
             <div className="flex items-center gap-3">
-              <SoundToggle />
               <ThemeToggle />
-              <Button onClick={() => { play('click'); scrollToSection('contacts'); }}>
+              <Button onClick={() => scrollToSection('contacts')}>
                 Связаться
               </Button>
             </div>
@@ -134,11 +128,11 @@ const Index = () => {
               Создаем персональные компьютеры под любые задачи: от офисной работы до профессионального гейминга и 3D-рендеринга
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button size="lg" className="text-lg button-hover" onClick={() => { play('click'); scrollToSection('catalog'); }} onMouseEnter={() => play('hover')}>
+              <Button size="lg" className="text-lg button-hover" onClick={() => scrollToSection('catalog')}>
                 <Icon name="ShoppingCart" size={20} className="mr-2" />
                 Смотреть каталог
               </Button>
-              <Button size="lg" variant="outline" className="text-lg button-hover" onClick={() => { play('click'); scrollToSection('contacts'); }} onMouseEnter={() => play('hover')}>
+              <Button size="lg" variant="outline" className="text-lg button-hover" onClick={() => scrollToSection('contacts')}>
                 <Icon name="MessageSquare" size={20} className="mr-2" />
                 Получить консультацию
               </Button>
@@ -153,7 +147,6 @@ const Index = () => {
                   featuresRef.isVisible ? 'visible' : ''
                 }`}
                 style={{ transitionDelay: `${index * 0.1}s` }}
-                onMouseEnter={() => play('cardFlip')}
               >
                 <CardContent className="p-6">
                   <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center mb-4 group-hover:bg-primary/20 group-hover:scale-110 transition-all duration-300">
@@ -185,7 +178,6 @@ const Index = () => {
                   catalogRef.isVisible ? 'visible' : ''
                 }`}
                 style={{ transitionDelay: `${index * 0.15}s` }}
-                onMouseEnter={() => play('cardFlip')}
               >
                 <div className="relative overflow-hidden h-48 bg-gradient-to-br from-muted to-background">
                   <img 
@@ -208,7 +200,7 @@ const Index = () => {
                   </ul>
                   <div className="flex items-center justify-between pt-4 border-t">
                     <span className="text-2xl font-bold text-primary group-hover:scale-110 transition-transform duration-300 inline-block">{computer.price}</span>
-                    <Button size="sm" className="button-hover" onClick={() => play('click')} onMouseEnter={() => play('hover')}>
+                    <Button size="sm" className="button-hover">
                       <Icon name="ShoppingCart" size={16} className="mr-2" />
                       Заказать
                     </Button>
@@ -222,8 +214,7 @@ const Index = () => {
             <Button 
               size="lg" 
               className="button-hover text-lg"
-              onClick={() => { play('click'); navigate('/catalog'); }}
-              onMouseEnter={() => play('hover')}
+              onClick={() => navigate('/catalog')}
             >
               <Icon name="Grid3x3" size={20} className="mr-2" />
               Показать все компьютеры
@@ -296,7 +287,7 @@ const Index = () => {
                   <label className="text-sm font-medium mb-2 block">Сообщение</label>
                   <Textarea placeholder="Расскажите о ваших требованиях к компьютеру..." rows={5} />
                 </div>
-                <Button className="w-full" size="lg" onClick={(e) => { e.preventDefault(); play('success'); }} onMouseEnter={() => play('hover')}>
+                <Button className="w-full" size="lg">
                   <Icon name="Send" size={20} className="mr-2" />
                   Отправить заявку
                 </Button>
