@@ -126,11 +126,11 @@ const Index = () => {
               Создаем персональные компьютеры под любые задачи: от офисной работы до профессионального гейминга и 3D-рендеринга
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button size="lg" className="text-lg" onClick={() => scrollToSection('catalog')}>
+              <Button size="lg" className="text-lg button-hover" onClick={() => scrollToSection('catalog')}>
                 <Icon name="ShoppingCart" size={20} className="mr-2" />
                 Смотреть каталог
               </Button>
-              <Button size="lg" variant="outline" className="text-lg" onClick={() => scrollToSection('contacts')}>
+              <Button size="lg" variant="outline" className="text-lg button-hover" onClick={() => scrollToSection('contacts')}>
                 <Icon name="MessageSquare" size={20} className="mr-2" />
                 Получить консультацию
               </Button>
@@ -141,16 +141,16 @@ const Index = () => {
             {features.map((feature, index) => (
               <Card 
                 key={index} 
-                className={`border-2 hover:border-primary hover:shadow-lg animate-on-scroll ${
+                className={`border-2 hover:border-primary card-hover animate-on-scroll ${
                   featuresRef.isVisible ? 'visible' : ''
                 }`}
                 style={{ transitionDelay: `${index * 0.1}s` }}
               >
                 <CardContent className="p-6">
-                  <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center mb-4">
+                  <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center mb-4 group-hover:bg-primary/20 group-hover:scale-110 transition-all duration-300">
                     <Icon name={feature.icon} size={24} className="text-primary" />
                   </div>
-                  <h3 className="text-xl font-semibold mb-2">{feature.title}</h3>
+                  <h3 className="text-xl font-semibold mb-2 group-hover:text-primary transition-colors duration-300">{feature.title}</h3>
                   <p className="text-muted-foreground">{feature.description}</p>
                 </CardContent>
               </Card>
@@ -172,21 +172,22 @@ const Index = () => {
             {computers.map((computer, index) => (
               <Card 
                 key={computer.id} 
-                className={`overflow-hidden group hover:shadow-xl animate-on-scroll-scale ${
+                className={`overflow-hidden group card-hover hover-shimmer animate-on-scroll-scale ${
                   catalogRef.isVisible ? 'visible' : ''
                 }`}
                 style={{ transitionDelay: `${index * 0.15}s` }}
               >
-                <div className="relative overflow-hidden h-48">
+                <div className="relative overflow-hidden h-48 bg-gradient-to-br from-muted to-background">
                   <img 
                     src={computer.image} 
                     alt={computer.name}
-                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+                    className="w-full h-full object-cover group-hover:scale-110 group-hover:rotate-2 transition-all duration-500"
                   />
-                  <Badge className="absolute top-4 right-4 bg-primary">{computer.category}</Badge>
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                  <Badge className="absolute top-4 right-4 bg-primary shadow-lg group-hover:scale-110 transition-transform duration-300">{computer.category}</Badge>
                 </div>
                 <CardContent className="p-6">
-                  <h3 className="text-xl font-bold mb-3">{computer.name}</h3>
+                  <h3 className="text-xl font-bold mb-3 group-hover:text-primary transition-colors duration-300">{computer.name}</h3>
                   <ul className="space-y-2 mb-4">
                     {computer.specs.map((spec, index) => (
                       <li key={index} className="text-sm text-muted-foreground flex items-center gap-2">
@@ -196,8 +197,8 @@ const Index = () => {
                     ))}
                   </ul>
                   <div className="flex items-center justify-between pt-4 border-t">
-                    <span className="text-2xl font-bold text-primary">{computer.price}</span>
-                    <Button size="sm">
+                    <span className="text-2xl font-bold text-primary group-hover:scale-110 transition-transform duration-300 inline-block">{computer.price}</span>
+                    <Button size="sm" className="button-hover">
                       <Icon name="ShoppingCart" size={16} className="mr-2" />
                       Заказать
                     </Button>
