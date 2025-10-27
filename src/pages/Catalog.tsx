@@ -113,9 +113,9 @@ const Catalog = () => {
   const categories = [
     { id: 'all', name: 'Все', icon: 'Grid3x3' },
     { id: 'Gaming', name: 'Игровые', icon: 'Gamepad2' },
-    { id: 'Creative', name: 'Для творчества', icon: 'Palette' },
-    { id: 'Office', name: 'Офисные', icon: 'Briefcase' },
-    { id: 'Professional', name: 'Профессиональные', icon: 'Building2' }
+    { id: 'Creative', name: 'Творчество', icon: 'Palette' },
+    { id: 'Office', name: 'Офис', icon: 'Briefcase' },
+    { id: 'Professional', name: 'Про', icon: 'Building2' }
   ];
 
   const filteredComputers = selectedCategory === 'all' 
@@ -130,75 +130,78 @@ const Catalog = () => {
 
   return (
     <div className="min-h-screen bg-background">
-      <nav className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-md border-b border-border">
-        <div className="container mx-auto px-4 py-4">
+      {/* Mobile Compact Nav */}
+      <nav className="fixed top-0 left-0 right-0 z-50 bg-background/95 backdrop-blur-md border-b border-border">
+        <div className="px-3 py-2 md:px-4 md:py-4">
           <div className="flex items-center justify-between">
             <button 
               onClick={() => navigate('/')}
-              className="flex items-center gap-2 hover:opacity-80 transition-opacity"
+              className="flex items-center gap-1.5 md:gap-2 hover:opacity-80 transition-opacity"
             >
-              <Icon name="Rocket" size={28} className="text-primary" />
-              <span className="text-2xl font-bold">WarpPC</span>
+              <Icon name="Rocket" size={20} className="text-primary md:w-7 md:h-7" />
+              <span className="text-lg md:text-2xl font-bold">WarpPC</span>
             </button>
-            <div className="flex items-center gap-3">
+            <div className="flex items-center gap-1.5 md:gap-3">
               <ThemeToggle />
-              <Button onClick={() => navigate('/')} variant="outline" size="sm" className="hidden md:flex">
-                <Icon name="Home" size={16} className="mr-2" />
-                На главную
-              </Button>
-              <Button onClick={() => navigate('/')} variant="outline" size="sm" className="md:hidden">
-                <Icon name="Home" size={16} />
+              <Button onClick={() => navigate('/')} variant="outline" size="sm" className="h-8 px-2 md:h-9 md:px-3">
+                <Icon name="Home" size={14} className="md:w-4 md:h-4" />
               </Button>
             </div>
           </div>
         </div>
       </nav>
 
-      <div className="pt-20 md:pt-24 pb-12 md:pb-20 px-2 md:px-4">
-        <div className="container mx-auto">
-          <div className="text-center mb-8 md:mb-12 animate-fade-in relative">
+      {/* Mobile Compact Content */}
+      <div className="pt-14 md:pt-24 pb-6 md:pb-20">
+        <div className="px-3 md:px-4 max-w-7xl mx-auto">
+          {/* Mobile Compact Title */}
+          <div className="text-center mb-4 md:mb-12 animate-fade-in relative">
             <div className="absolute inset-0 -z-10 overflow-hidden">
-              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 md:w-96 md:h-96 bg-primary/5 rounded-full blur-3xl animate-pulse" />
-              <div className="absolute top-1/2 left-1/4 -translate-x-1/2 -translate-y-1/2 w-48 h-48 md:w-72 md:h-72 bg-destructive/5 rounded-full blur-3xl animate-pulse" style={{animationDelay: '1s'}} />
-              <div className="absolute top-1/2 left-3/4 -translate-x-1/2 -translate-y-1/2 w-48 h-48 md:w-72 md:h-72 bg-primary/5 rounded-full blur-3xl animate-pulse" style={{animationDelay: '2s'}} />
+              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-48 h-48 md:w-96 md:h-96 bg-primary/5 rounded-full blur-3xl animate-pulse" />
+              <div className="absolute top-1/2 left-1/4 -translate-x-1/2 -translate-y-1/2 w-32 h-32 md:w-72 md:h-72 bg-destructive/5 rounded-full blur-3xl animate-pulse" style={{animationDelay: '1s'}} />
+              <div className="absolute top-1/2 left-3/4 -translate-x-1/2 -translate-y-1/2 w-32 h-32 md:w-72 md:h-72 bg-primary/5 rounded-full blur-3xl animate-pulse" style={{animationDelay: '2s'}} />
             </div>
-            <h1 className="text-3xl md:text-6xl font-bold mb-3 md:mb-4 bg-gradient-to-r from-primary via-destructive to-primary bg-clip-text text-transparent animate-gradient bg-300">
-              Полный каталог
+            <h1 className="text-2xl md:text-6xl font-bold mb-2 md:mb-4 bg-gradient-to-r from-primary via-destructive to-primary bg-clip-text text-transparent animate-gradient bg-300">
+              Каталог
             </h1>
-            <p className="text-base md:text-xl text-muted-foreground px-4">Все наши конфигурации компьютеров в одном месте</p>
+            <p className="text-xs md:text-xl text-muted-foreground hidden md:block">Все наши конфигурации компьютеров в одном месте</p>
           </div>
 
-          <div className="flex flex-wrap gap-2 md:gap-3 justify-center mb-8 md:mb-12 px-2">
+          {/* Mobile Compact Filters */}
+          <div className="flex gap-1.5 md:gap-3 overflow-x-auto pb-2 mb-4 md:mb-12 scrollbar-hide justify-start md:justify-center">
             {categories.map((category, idx) => (
               <Button
                 key={category.id}
                 variant={selectedCategory === category.id ? 'default' : 'outline'}
                 onClick={() => setSelectedCategory(category.id)}
-                className={`button-hover animate-fade-in text-xs md:text-sm relative overflow-hidden group/btn ${
+                size="sm"
+                className={`button-hover animate-fade-in text-[10px] md:text-sm relative overflow-hidden group/btn h-7 px-2 md:h-9 md:px-4 flex-shrink-0 ${
                   selectedCategory === category.id ? 'shadow-lg shadow-primary/50' : ''
                 }`}
                 style={{ animationDelay: `${idx * 0.1}s` }}
               >
                 <div className="absolute inset-0 bg-gradient-to-r from-primary/0 via-primary/30 to-primary/0 translate-x-[-200%] group-hover/btn:translate-x-[200%] transition-transform duration-1000" />
-                <Icon name={category.icon} size={16} className="mr-1 md:mr-2 group-hover/btn:rotate-12 transition-transform duration-300" />
-                <span className="relative">{category.name}</span>
+                <Icon name={category.icon} size={12} className="md:mr-2 md:w-4 md:h-4 group-hover/btn:rotate-12 transition-transform duration-300" />
+                <span className="relative hidden md:inline">{category.name}</span>
               </Button>
             ))}
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-6 px-2 md:px-0">
+          {/* Mobile Compact Grid */}
+          <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-2 md:gap-6">
             {filteredComputers.map((computer, index) => (
               <Card 
                 key={`${computer.id}-${selectedCategory}`}
-                className={`overflow-hidden group card-hover hover-shimmer relative border-2 ${
+                className={`overflow-hidden group card-hover hover-shimmer relative border ${
                   animateCards ? 'animate-fade-in' : 'opacity-0'
                 }`}
                 style={{ animationDelay: `${index * 0.08}s` }}
               >
-                <div className="absolute -top-20 -right-20 w-40 h-40 bg-primary/10 rounded-full blur-2xl group-hover:bg-primary/30 transition-all duration-700 animate-pulse-slow" />
-                <div className="absolute -bottom-20 -left-20 w-40 h-40 bg-destructive/10 rounded-full blur-2xl group-hover:bg-destructive/30 transition-all duration-700 animate-pulse-slow" style={{animationDelay: '1s'}} />
+                <div className="absolute -top-10 -right-10 w-20 h-20 md:-top-20 md:-right-20 md:w-40 md:h-40 bg-primary/10 rounded-full blur-2xl group-hover:bg-primary/30 transition-all duration-700 animate-pulse-slow" />
+                <div className="absolute -bottom-10 -left-10 w-20 h-20 md:-bottom-20 md:-left-20 md:w-40 md:h-40 bg-destructive/10 rounded-full blur-2xl group-hover:bg-destructive/30 transition-all duration-700 animate-pulse-slow" style={{animationDelay: '1s'}} />
                 
-                <div className="relative overflow-hidden h-40 md:h-48 bg-gradient-to-br from-muted via-background to-muted">
+                {/* Mobile Compact Image */}
+                <div className="relative overflow-hidden h-28 md:h-48 bg-gradient-to-br from-muted via-background to-muted">
                   <div className="absolute inset-0 bg-gradient-to-br from-primary/30 via-destructive/20 to-primary/30 opacity-0 group-hover:opacity-100 transition-all duration-700 animate-gradient-slow" />
                   <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(239,68,68,0.1),transparent_50%)] opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
                   <img 
@@ -210,28 +213,42 @@ const Catalog = () => {
                   <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
                     <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full bg-gradient-radial from-primary/20 to-transparent blur-xl animate-pulse-glow" />
                   </div>
-                  <Badge className="absolute top-2 right-2 md:top-4 md:right-4 text-xs md:text-sm bg-primary/90 backdrop-blur-sm shadow-lg group-hover:scale-125 group-hover:rotate-12 group-hover:shadow-primary/50 transition-all duration-500">
+                  <Badge className="absolute top-1 right-1 md:top-4 md:right-4 text-[8px] md:text-sm bg-primary/90 backdrop-blur-sm shadow-lg group-hover:scale-125 group-hover:rotate-12 group-hover:shadow-primary/50 transition-all duration-500 px-1 py-0 md:px-2 md:py-1">
                     {computer.category}
                   </Badge>
-                  <div className="absolute top-2 left-2 md:top-4 md:left-4 w-8 h-8 md:w-10 md:h-10 rounded-full bg-primary/20 backdrop-blur-sm opacity-0 group-hover:opacity-100 transition-all duration-500 flex items-center justify-center">
-                    <Icon name="Zap" size={16} className="text-primary animate-pulse" />
+                  <div className="absolute top-1 left-1 md:top-4 md:left-4 w-6 h-6 md:w-10 md:h-10 rounded-full bg-primary/20 backdrop-blur-sm opacity-0 group-hover:opacity-100 transition-all duration-500 flex items-center justify-center">
+                    <Icon name="Zap" size={12} className="text-primary animate-pulse md:w-4 md:h-4" />
                   </div>
                 </div>
 
-                <CardContent className="p-4 md:p-6 relative">
-                  <div className="absolute top-0 left-0 w-0 h-1 bg-gradient-to-r from-primary via-destructive to-primary bg-300 group-hover:w-full transition-all duration-1000 animate-gradient" />
-                  <div className="absolute top-0 right-0 w-1 h-0 bg-gradient-to-b from-primary to-destructive group-hover:h-full transition-all duration-1000 delay-300" />
+                {/* Mobile Compact Content */}
+                <CardContent className="p-2 md:p-6 relative">
+                  <div className="absolute top-0 left-0 w-0 h-0.5 md:h-1 bg-gradient-to-r from-primary via-destructive to-primary bg-300 group-hover:w-full transition-all duration-1000 animate-gradient" />
+                  <div className="absolute top-0 right-0 w-0.5 md:w-1 h-0 bg-gradient-to-b from-primary to-destructive group-hover:h-full transition-all duration-1000 delay-300" />
                   
-                  <h3 className="text-base md:text-xl font-bold mb-2 md:mb-3 group-hover:text-primary transition-all duration-500 group-hover:translate-x-2 line-clamp-2">
+                  {/* Mobile Compact Title */}
+                  <h3 className="text-[11px] leading-tight md:text-xl font-bold mb-1.5 md:mb-3 group-hover:text-primary transition-all duration-500 group-hover:translate-x-1 line-clamp-2">
                     {computer.name}
                   </h3>
                   
-                  <ul className="space-y-1.5 md:space-y-2 mb-3 md:mb-4">
-                    {computer.specs.map((spec, idx) => (
+                  {/* Mobile Compact Specs */}
+                  <ul className="space-y-0.5 md:space-y-2 mb-2 md:mb-4">
+                    {computer.specs.slice(0, 2).map((spec, idx) => (
                       <li 
                         key={idx} 
-                        className="text-xs md:text-sm text-muted-foreground flex items-start gap-2 opacity-60 group-hover:opacity-100 transition-all duration-300 group-hover:translate-x-2"
+                        className="text-[9px] md:text-sm text-muted-foreground flex items-start gap-1 md:gap-2 opacity-60 group-hover:opacity-100 transition-all duration-300 group-hover:translate-x-1"
                         style={{ transitionDelay: `${idx * 0.1}s` }}
+                      >
+                        <Icon name="Check" size={10} className="text-primary group-hover:scale-125 group-hover:rotate-12 transition-all duration-300 flex-shrink-0 mt-0.5 md:w-3.5 md:h-3.5" />
+                        <span className="group-hover:text-foreground transition-colors duration-300 line-clamp-1">{spec}</span>
+                      </li>
+                    ))}
+                    <li className="text-[9px] md:text-sm text-muted-foreground opacity-40 md:hidden">+{computer.specs.length - 2} ещё</li>
+                    {computer.specs.slice(2).map((spec, idx) => (
+                      <li 
+                        key={idx + 2} 
+                        className="hidden md:flex text-sm text-muted-foreground items-start gap-2 opacity-60 group-hover:opacity-100 transition-all duration-300 group-hover:translate-x-2"
+                        style={{ transitionDelay: `${(idx + 2) * 0.1}s` }}
                       >
                         <Icon name="Check" size={14} className="text-primary group-hover:scale-125 group-hover:rotate-12 transition-all duration-300 flex-shrink-0 mt-0.5" />
                         <span className="group-hover:text-foreground transition-colors duration-300 line-clamp-1">{spec}</span>
@@ -239,13 +256,14 @@ const Catalog = () => {
                     ))}
                   </ul>
                   
-                  <div className="flex items-center justify-between pt-3 md:pt-4 border-t border-border/50 group-hover:border-primary/50 transition-colors duration-500">
-                    <span className="text-xl md:text-2xl font-bold text-primary group-hover:scale-110 md:group-hover:scale-125 transition-all duration-500 inline-block relative">
+                  {/* Mobile Compact Price & Button */}
+                  <div className="flex items-center justify-between pt-2 md:pt-4 border-t border-border/50 group-hover:border-primary/50 transition-colors duration-500">
+                    <span className="text-sm md:text-2xl font-bold text-primary group-hover:scale-110 md:group-hover:scale-125 transition-all duration-500 inline-block relative">
                       <span className="absolute inset-0 blur-lg bg-primary/50 opacity-0 group-hover:opacity-100 transition-opacity duration-500 animate-pulse" />
                       <span className="relative animate-gradient bg-gradient-to-r from-primary via-destructive to-primary bg-clip-text bg-300">{computer.price}</span>
                     </span>
-                    <Button size="sm" className="button-hover group-hover:scale-110 transition-all duration-300 text-xs md:text-sm shadow-lg group-hover:shadow-primary/50">
-                      <Icon name="ShoppingCart" size={14} className="md:mr-2 group-hover:rotate-12 group-hover:scale-125 transition-all duration-300" />
+                    <Button size="sm" className="button-hover group-hover:scale-110 transition-all duration-300 text-[9px] md:text-sm shadow-lg group-hover:shadow-primary/50 h-6 px-2 md:h-9 md:px-4">
+                      <Icon name="ShoppingCart" size={12} className="group-hover:rotate-12 group-hover:scale-125 transition-all duration-300 md:mr-2 md:w-3.5 md:h-3.5" />
                       <span className="hidden md:inline">Заказать</span>
                     </Button>
                   </div>
