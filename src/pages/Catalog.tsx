@@ -1,279 +1,189 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
-import { Badge } from '@/components/ui/badge';
 import Icon from '@/components/ui/icon';
 import { ThemeToggle } from '@/components/ThemeToggle';
 import { useNavigate } from 'react-router-dom';
 
 const Catalog = () => {
   const navigate = useNavigate();
-  const [selectedCategory, setSelectedCategory] = useState('all');
-  const [animateCards, setAnimateCards] = useState(false);
-  const cardsRef = useRef<(HTMLDivElement | null)[]>([]);
+  const [filter, setFilter] = useState('all');
 
-  const allComputers = [
+  const products = [
     {
       id: 1,
-      name: 'Quantum Rift Pro',
-      category: 'Gaming',
-      price: '₽ 185 000',
-      specs: ['RTX 4090', 'i9-14900K', '64GB DDR5', '4TB Gen5 NVMe'],
-      gradient: 'from-emerald-500 via-teal-500 to-cyan-500'
+      name: 'GENESIS',
+      category: 'starter',
+      power: '15 TFLOPS',
+      price: 89990,
+      specs: ['Intel i5-13400F', 'RTX 4060 8GB', '16GB DDR4', '512GB NVMe'],
+      color: 'from-purple-600 to-pink-600'
     },
     {
       id: 2,
-      name: 'Nebula Creator X',
-      category: 'Creative',
-      price: '₽ 240 000',
-      specs: ['RTX 4090', 'Ryzen 9 7950X3D', '128GB DDR5', '8TB Storage'],
-      gradient: 'from-purple-500 via-pink-500 to-rose-500'
+      name: 'GENESIS PRO',
+      category: 'starter',
+      power: '18 TFLOPS',
+      price: 109990,
+      specs: ['AMD Ryzen 5 7600X', 'RTX 4060 Ti 8GB', '32GB DDR5', '1TB NVMe'],
+      color: 'from-purple-500 to-pink-500'
     },
     {
       id: 3,
-      name: 'Nova Office Plus',
-      category: 'Office',
-      price: '₽ 75 000',
-      specs: ['RTX 4060', 'i5-14600K', '32GB DDR5', '1TB NVMe'],
-      gradient: 'from-blue-500 via-indigo-500 to-violet-500'
+      name: 'PHANTOM',
+      category: 'mid',
+      power: '28 TFLOPS',
+      price: 149990,
+      specs: ['AMD Ryzen 7 7700X', 'RTX 4070 Ti 12GB', '32GB DDR5', '1TB NVMe'],
+      color: 'from-cyan-500 to-blue-600'
     },
     {
       id: 4,
-      name: 'Titan Workstation',
-      category: 'Professional',
-      price: '₽ 320 000',
-      specs: ['RTX A6000', 'Xeon W-3375', '256GB ECC', '16TB RAID'],
-      gradient: 'from-orange-500 via-amber-500 to-yellow-500'
+      name: 'PHANTOM ULTRA',
+      category: 'mid',
+      power: '32 TFLOPS',
+      price: 179990,
+      specs: ['Intel i7-14700K', 'RTX 4070 Ti Super 16GB', '32GB DDR5', '2TB NVMe'],
+      color: 'from-cyan-400 to-blue-500'
     },
     {
       id: 5,
-      name: 'Cyber Storm Elite',
-      category: 'Gaming',
-      price: '₽ 220 000',
-      specs: ['RTX 4080 Super', 'i9-14900KS', '64GB DDR5', '4TB NVMe'],
-      gradient: 'from-green-500 via-emerald-500 to-teal-500'
+      name: 'TITAN',
+      category: 'high',
+      power: '45 TFLOPS',
+      price: 239990,
+      specs: ['Intel i9-14900K', 'RTX 4090 24GB', '64GB DDR5', '2TB NVMe'],
+      color: 'from-orange-500 to-red-600'
     },
     {
       id: 6,
-      name: 'Spark Mini',
-      category: 'Office',
-      price: '₽ 50 000',
-      specs: ['RTX 4050', 'i3-14100', '16GB DDR5', '512GB SSD'],
-      gradient: 'from-sky-500 via-blue-500 to-indigo-500'
-    },
-    {
-      id: 7,
-      name: 'Stream Master',
-      category: 'Gaming',
-      price: '₽ 195 000',
-      specs: ['RTX 4070 Ti', 'Ryzen 9 7900X', '64GB DDR5', '2TB NVMe'],
-      gradient: 'from-lime-500 via-green-500 to-emerald-500'
-    },
-    {
-      id: 8,
-      name: 'Vision Designer',
-      category: 'Creative',
-      price: '₽ 190 000',
-      specs: ['RTX 4070 Super', 'i7-14700K', '64GB DDR5', '3TB SSD'],
-      gradient: 'from-fuchsia-500 via-purple-500 to-violet-500'
-    },
-    {
-      id: 9,
-      name: 'Apex Server',
-      category: 'Professional',
-      price: '₽ 380 000',
-      specs: ['RTX A6000 Ada', 'Xeon W-3465X', '512GB ECC', '32TB Storage'],
-      gradient: 'from-red-500 via-orange-500 to-amber-500'
-    },
-    {
-      id: 10,
-      name: 'Pulse Compact',
-      category: 'Office',
-      price: '₽ 85 000',
-      specs: ['RTX 4060', 'i5-14400', '32GB DDR5', '1TB SSD'],
-      gradient: 'from-cyan-500 via-sky-500 to-blue-500'
-    },
-    {
-      id: 11,
-      name: 'Cinema Pro Max',
-      category: 'Creative',
-      price: '₽ 280 000',
-      specs: ['RTX 4090', 'i9-14900KS', '192GB DDR5', '12TB NVMe'],
-      gradient: 'from-pink-500 via-rose-500 to-red-500'
-    },
-    {
-      id: 12,
-      name: 'Arena Starter',
-      category: 'Gaming',
-      price: '₽ 95 000',
-      specs: ['RTX 4060 Ti', 'Ryzen 5 7600X', '32GB DDR5', '1TB NVMe'],
-      gradient: 'from-teal-500 via-cyan-500 to-sky-500'
+      name: 'TITAN APEX',
+      category: 'high',
+      power: '50 TFLOPS',
+      price: 289990,
+      specs: ['Intel i9-14900KS', 'RTX 4090 24GB', '128GB DDR5', '4TB NVMe'],
+      color: 'from-orange-400 to-red-500'
     }
   ];
 
   const categories = [
-    { id: 'all', name: 'Все системы', icon: 'Grid3x3' },
-    { id: 'Gaming', name: 'Gaming', icon: 'Gamepad2' },
-    { id: 'Creative', name: 'Creative', icon: 'Palette' },
-    { id: 'Office', name: 'Office', icon: 'Briefcase' },
-    { id: 'Professional', name: 'Pro', icon: 'Building2' }
+    { id: 'all', label: 'ВСЕ СИСТЕМЫ', icon: 'Grid3x3' },
+    { id: 'starter', label: 'СТАРТ', icon: 'Zap' },
+    { id: 'mid', label: 'СРЕДНИЙ', icon: 'TrendingUp' },
+    { id: 'high', label: 'ПРЕМИУМ', icon: 'Award' }
   ];
 
-  const filteredComputers = selectedCategory === 'all' 
-    ? allComputers 
-    : allComputers.filter(c => c.category === selectedCategory);
-
-  useEffect(() => {
-    setAnimateCards(false);
-    const timer = setTimeout(() => setAnimateCards(true), 50);
-    return () => clearTimeout(timer);
-  }, [selectedCategory]);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('visible');
-          }
-        });
-      },
-      {
-        threshold: 0.1,
-        rootMargin: '0px 0px -50px 0px'
-      }
-    );
-
-    cardsRef.current.forEach((card) => {
-      if (card) observer.observe(card);
-    });
-
-    return () => {
-      cardsRef.current.forEach((card) => {
-        if (card) observer.unobserve(card);
-      });
-    };
-  }, [filteredComputers]);
+  const filtered = filter === 'all' ? products : products.filter(p => p.category === filter);
 
   return (
-    <div className="min-h-screen bg-background relative overflow-hidden">
-      <div className="fixed inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-primary/20 via-background to-background pointer-events-none" />
-      <div className="fixed inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PHBhdHRlcm4gaWQ9ImdyaWQiIHdpZHRoPSI2MCIgaGVpZ2h0PSI2MCIgcGF0dGVyblVuaXRzPSJ1c2VyU3BhY2VPblVzZSI+PHBhdGggZD0iTSAxMCAwIEwgMCAwIDAgMTAiIGZpbGw9Im5vbmUiIHN0cm9rZT0icmdiYSgyNTUsMjU1LDI1NSwwLjAzKSIgc3Ryb2tlLXdpZHRoPSIxIi8+PC9wYXR0ZXJuPjwvZGVmcz48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSJ1cmwoI2dyaWQpIi8+PC9zdmc+')] opacity-40 pointer-events-none" />
+    <div className="min-h-screen bg-background text-foreground">
+      <div className="fixed inset-0 bg-[linear-gradient(to_right,#1e293b_1px,transparent_1px),linear-gradient(to_bottom,#1e293b_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_80%_50%_at_50%_0%,#000,transparent)]" />
 
-      <nav className="fixed top-0 left-0 right-0 z-50 glass border-b border-white/10">
-        <div className="container mx-auto px-6 py-5">
-          <div className="flex items-center justify-between">
-            <button 
-              onClick={() => navigate('/')}
-              className="flex items-center gap-3 hover:opacity-80 transition-opacity"
-            >
-              <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-primary via-secondary to-accent animate-gradient flex items-center justify-center">
-                <Icon name="Cpu" size={24} className="text-black" />
-              </div>
-              <span className="text-2xl font-bold text-gradient">WarpPC</span>
-            </button>
-            <div className="flex items-center gap-3">
-              <ThemeToggle />
-              <Button onClick={() => navigate('/')} variant="outline" className="glass">
-                <Icon name="Home" size={18} className="mr-2" />
-                Главная
-              </Button>
+      <nav className="fixed top-0 w-full z-50 glass-dark border-b border-primary/20">
+        <div className="container mx-auto px-6 py-4 flex items-center justify-between">
+          <button 
+            onClick={() => navigate('/')}
+            className="flex items-center gap-3 hover:opacity-80 transition-opacity"
+          >
+            <div className="w-10 h-10 bg-gradient-to-br from-primary to-accent rounded-lg flex items-center justify-center">
+              <Icon name="Zap" className="text-black" size={24} />
             </div>
+            <h1 className="text-2xl font-bold tracking-wider">WARP<span className="text-primary">PC</span></h1>
+          </button>
+          <div className="flex items-center gap-4">
+            <ThemeToggle />
+            <Button onClick={() => navigate('/')} variant="outline" className="border-primary/50 hover:bg-primary/10">
+              <Icon name="Home" size={16} className="mr-2" />
+              ГЛАВНАЯ
+            </Button>
           </div>
         </div>
       </nav>
 
-      <div className="pt-32 pb-20">
-        <div className="container mx-auto px-6">
-          <div className="text-center mb-16 animate-fade-in">
-            <h1 className="text-6xl md:text-7xl font-bold mb-6">
-              Полный <span className="text-gradient">каталог</span>
+      <div className="relative pt-32 pb-20 px-6">
+        <div className="container mx-auto">
+          <div className="text-center mb-16 slide-up">
+            <h1 className="text-6xl md:text-8xl font-black mb-6">
+              ПОЛНЫЙ <span className="text-primary neon-text">КАТАЛОГ</span>
             </h1>
-            <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-              Выберите готовую конфигурацию или закажите персональную сборку
-            </p>
+            <p className="text-xl text-muted-foreground">Все наши системы в одном месте</p>
           </div>
 
-          <div className="flex gap-3 overflow-x-auto pb-4 mb-12 scrollbar-hide justify-center flex-wrap">
-            {categories.map((category, idx) => (
+          <div className="flex flex-wrap justify-center gap-4 mb-16">
+            {categories.map((cat) => (
               <Button
-                key={category.id}
-                variant={selectedCategory === category.id ? 'default' : 'outline'}
-                onClick={() => setSelectedCategory(category.id)}
-                size="lg"
-                className={`button-hover animate-fade-in glass ${
-                  selectedCategory === category.id ? 'neon-border' : 'border-white/20'
+                key={cat.id}
+                onClick={() => setFilter(cat.id)}
+                variant={filter === cat.id ? 'default' : 'outline'}
+                className={`font-bold tracking-wider ${
+                  filter === cat.id 
+                    ? 'bg-primary hover:bg-primary/90 text-black glow-box' 
+                    : 'border-primary/50 hover:bg-primary/10'
                 }`}
-                style={{ animationDelay: `${idx * 0.1}s` }}
               >
-                <Icon name={category.icon} size={20} className="mr-2" />
-                {category.name}
+                <Icon name={cat.icon} size={18} className="mr-2" />
+                {cat.label}
               </Button>
             ))}
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {filteredComputers.map((computer, index) => (
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
+            {filtered.map((product, idx) => (
               <Card 
-                key={computer.id}
-                ref={(el) => (cardsRef.current[index] = el)}
-                className={`overflow-hidden group card-hover glass neon-border ${
-                  animateCards ? 'animate-on-scroll-scale visible' : 'animate-on-scroll-scale'
-                }`}
-                style={{ transitionDelay: `${index * 0.1}s` }}
+                key={product.id}
+                className="relative overflow-hidden group hover:scale-105 transition-all duration-500 glass-dark border-2 border-primary/30 hover:border-primary"
+                style={{ animationDelay: `${idx * 0.1}s` }}
               >
-                <div className={`relative h-64 bg-gradient-to-br ${computer.gradient} animate-gradient`}>
-                  <div className="absolute inset-0 bg-black/40 backdrop-blur-sm" />
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <Icon name="Cpu" size={100} className="text-white/20 group-hover:scale-110 transition-transform duration-500" />
-                  </div>
-                  <Badge className="absolute top-4 right-4 bg-black/50 backdrop-blur-md border border-white/20 text-sm">
-                    {computer.category}
-                  </Badge>
-                </div>
+                <div className={`absolute inset-0 bg-gradient-to-br ${product.color} opacity-10 group-hover:opacity-20 transition-opacity`} />
                 
-                <CardContent className="p-8">
-                  <h3 className="text-2xl font-bold mb-6 neon-text">{computer.name}</h3>
-                  <ul className="space-y-3 mb-8">
-                    {computer.specs.map((spec, i) => (
-                      <li key={i} className="flex items-center gap-3 text-base text-muted-foreground">
-                        <div className="w-2 h-2 rounded-full bg-primary" />
-                        {spec}
-                      </li>
+                <CardContent className="relative p-8">
+                  <div className="mb-6">
+                    <h3 className="text-3xl font-black mb-2 tracking-wider">{product.name}</h3>
+                    <div className="flex items-center gap-2 text-primary text-sm font-bold">
+                      <Icon name="Cpu" size={16} />
+                      <span>{product.power}</span>
+                    </div>
+                  </div>
+
+                  <div className="space-y-3 mb-6">
+                    {product.specs.map((spec, i) => (
+                      <div key={i} className="flex items-center gap-3 text-muted-foreground">
+                        <div className="w-1 h-1 bg-primary rounded-full" />
+                        <span className="text-sm">{spec}</span>
+                      </div>
                     ))}
-                  </ul>
-                  <div className="flex items-center justify-between pt-6 border-t border-white/10">
-                    <span className="text-3xl font-bold text-primary">{computer.price}</span>
-                    <Button size="lg" className="button-hover">
+                  </div>
+
+                  <div className="pt-6 border-t border-primary/20">
+                    <div className="text-3xl font-black text-primary mb-4">
+                      {product.price.toLocaleString('ru')} ₽
+                    </div>
+                    <Button className="w-full bg-primary hover:bg-primary/90 text-black font-bold h-12">
                       <Icon name="ShoppingCart" size={18} className="mr-2" />
-                      Заказать
+                      ЗАКАЗАТЬ
                     </Button>
                   </div>
                 </CardContent>
               </Card>
             ))}
           </div>
-
-          {filteredComputers.length === 0 && (
-            <div className="text-center py-20">
-              <Icon name="Search" size={64} className="text-muted-foreground mx-auto mb-4 opacity-50" />
-              <p className="text-xl text-muted-foreground">Компьютеры не найдены в этой категории</p>
-            </div>
-          )}
         </div>
       </div>
 
-      <footer className="py-12 px-6 border-t border-white/10 relative">
-        <div className="container mx-auto text-center">
-          <div className="flex items-center justify-center gap-3 mb-4">
-            <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-primary via-secondary to-accent animate-gradient flex items-center justify-center">
-              <Icon name="Cpu" size={18} className="text-black" />
+      <footer className="relative py-12 px-6 border-t border-primary/20">
+        <div className="container mx-auto">
+          <div className="flex flex-col md:flex-row items-center justify-between gap-6">
+            <div className="flex items-center gap-3">
+              <div className="w-8 h-8 bg-gradient-to-br from-primary to-accent rounded-lg flex items-center justify-center">
+                <Icon name="Zap" className="text-black" size={18} />
+              </div>
+              <span className="text-xl font-bold tracking-wider">WARP<span className="text-primary">PC</span></span>
             </div>
-            <span className="text-xl font-bold text-gradient">WarpPC</span>
+            
+            <div className="text-sm text-muted-foreground">
+              © 2025 WarpPC. Все права защищены.
+            </div>
           </div>
-          <p className="text-muted-foreground">
-            © 2025 WarpPC. Сборка компьютеров нового поколения
-          </p>
         </div>
       </footer>
     </div>
