@@ -15,108 +15,108 @@ const Catalog = () => {
   const allComputers = [
     {
       id: 1,
-      name: 'WarpPC Gaming Pro',
+      name: 'Quantum Rift Pro',
       category: 'Gaming',
-      price: '₽ 150 000',
-      specs: ['RTX 4080', 'i9-13900K', '32GB RAM', '2TB NVMe'],
-      image: 'https://images.unsplash.com/photo-1587202372634-32705e3bf49c?w=500&h=400&fit=crop'
+      price: '₽ 185 000',
+      specs: ['RTX 4090', 'i9-14900K', '64GB DDR5', '4TB Gen5 NVMe'],
+      gradient: 'from-emerald-500 via-teal-500 to-cyan-500'
     },
     {
       id: 2,
-      name: 'WarpPC Creator',
+      name: 'Nebula Creator X',
       category: 'Creative',
-      price: '₽ 200 000',
-      specs: ['RTX 4090', 'Ryzen 9 7950X', '64GB RAM', '4TB NVMe'],
-      image: 'https://images.unsplash.com/photo-1591799264318-7e6ef8ddb7ea?w=500&h=400&fit=crop'
+      price: '₽ 240 000',
+      specs: ['RTX 4090', 'Ryzen 9 7950X3D', '128GB DDR5', '8TB Storage'],
+      gradient: 'from-purple-500 via-pink-500 to-rose-500'
     },
     {
       id: 3,
-      name: 'WarpPC Office',
+      name: 'Nova Office Plus',
       category: 'Office',
-      price: '₽ 60 000',
-      specs: ['GTX 1660', 'i5-12400', '16GB RAM', '512GB SSD'],
-      image: 'https://images.unsplash.com/photo-1593640408182-31c70c8268f5?w=500&h=400&fit=crop'
+      price: '₽ 75 000',
+      specs: ['RTX 4060', 'i5-14600K', '32GB DDR5', '1TB NVMe'],
+      gradient: 'from-blue-500 via-indigo-500 to-violet-500'
     },
     {
       id: 4,
-      name: 'WarpPC Workstation',
+      name: 'Titan Workstation',
       category: 'Professional',
-      price: '₽ 250 000',
-      specs: ['RTX A5000', 'Xeon W-2295', '128GB RAM', '8TB Storage'],
-      image: 'https://images.unsplash.com/photo-1555680202-c3335513cf32?w=500&h=400&fit=crop'
+      price: '₽ 320 000',
+      specs: ['RTX A6000', 'Xeon W-3375', '256GB ECC', '16TB RAID'],
+      gradient: 'from-orange-500 via-amber-500 to-yellow-500'
     },
     {
       id: 5,
-      name: 'WarpPC Gaming Elite',
+      name: 'Cyber Storm Elite',
       category: 'Gaming',
       price: '₽ 220 000',
-      specs: ['RTX 4090', 'i9-14900K', '64GB RAM', '4TB NVMe'],
-      image: 'https://images.unsplash.com/photo-1600861194942-f883de0dfe96?w=500&h=400&fit=crop'
+      specs: ['RTX 4080 Super', 'i9-14900KS', '64GB DDR5', '4TB NVMe'],
+      gradient: 'from-green-500 via-emerald-500 to-teal-500'
     },
     {
       id: 6,
-      name: 'WarpPC Budget',
+      name: 'Spark Mini',
       category: 'Office',
-      price: '₽ 40 000',
-      specs: ['GTX 1650', 'i3-12100', '8GB RAM', '256GB SSD'],
-      image: 'https://images.unsplash.com/photo-1547082299-de196ea013d6?w=500&h=400&fit=crop'
+      price: '₽ 50 000',
+      specs: ['RTX 4050', 'i3-14100', '16GB DDR5', '512GB SSD'],
+      gradient: 'from-sky-500 via-blue-500 to-indigo-500'
     },
     {
       id: 7,
-      name: 'WarpPC Streamer',
+      name: 'Stream Master',
       category: 'Gaming',
-      price: '₽ 180 000',
-      specs: ['RTX 4070 Ti', 'Ryzen 9 7900X', '32GB RAM', '2TB NVMe'],
-      image: 'https://images.unsplash.com/photo-1616588589676-62b3bd4ff6d2?w=500&h=400&fit=crop'
+      price: '₽ 195 000',
+      specs: ['RTX 4070 Ti', 'Ryzen 9 7900X', '64GB DDR5', '2TB NVMe'],
+      gradient: 'from-lime-500 via-green-500 to-emerald-500'
     },
     {
       id: 8,
-      name: 'WarpPC Designer',
+      name: 'Vision Designer',
       category: 'Creative',
-      price: '₽ 170 000',
-      specs: ['RTX 4070', 'i7-13700K', '32GB RAM', '2TB SSD'],
-      image: 'https://images.unsplash.com/photo-1587202372775-e229f172b9d7?w=500&h=400&fit=crop'
+      price: '₽ 190 000',
+      specs: ['RTX 4070 Super', 'i7-14700K', '64GB DDR5', '3TB SSD'],
+      gradient: 'from-fuchsia-500 via-purple-500 to-violet-500'
     },
     {
       id: 9,
-      name: 'WarpPC Server',
+      name: 'Apex Server',
       category: 'Professional',
-      price: '₽ 300 000',
-      specs: ['RTX A6000', 'Xeon W-3345', '256GB RAM', '16TB Storage'],
-      image: 'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=500&h=400&fit=crop'
+      price: '₽ 380 000',
+      specs: ['RTX A6000 Ada', 'Xeon W-3465X', '512GB ECC', '32TB Storage'],
+      gradient: 'from-red-500 via-orange-500 to-amber-500'
     },
     {
       id: 10,
-      name: 'WarpPC Compact',
+      name: 'Pulse Compact',
       category: 'Office',
-      price: '₽ 80 000',
-      specs: ['RTX 3060', 'i5-13400', '16GB RAM', '1TB SSD'],
-      image: 'https://images.unsplash.com/photo-1624705002806-5d72df19c3ad?w=500&h=400&fit=crop'
+      price: '₽ 85 000',
+      specs: ['RTX 4060', 'i5-14400', '32GB DDR5', '1TB SSD'],
+      gradient: 'from-cyan-500 via-sky-500 to-blue-500'
     },
     {
       id: 11,
-      name: 'WarpPC Video Pro',
+      name: 'Cinema Pro Max',
       category: 'Creative',
-      price: '₽ 240 000',
-      specs: ['RTX 4090', 'i9-13900KS', '128GB RAM', '8TB NVMe'],
-      image: 'https://images.unsplash.com/photo-1603481546921-34775a0a60e7?w=500&h=400&fit=crop'
+      price: '₽ 280 000',
+      specs: ['RTX 4090', 'i9-14900KS', '192GB DDR5', '12TB NVMe'],
+      gradient: 'from-pink-500 via-rose-500 to-red-500'
     },
     {
       id: 12,
-      name: 'WarpPC Starter',
+      name: 'Arena Starter',
       category: 'Gaming',
-      price: '₽ 90 000',
-      specs: ['RTX 3060', 'Ryzen 5 5600', '16GB RAM', '512GB NVMe'],
-      image: 'https://images.unsplash.com/photo-1587202372583-49330a15584d?w=500&h=400&fit=crop'
+      price: '₽ 95 000',
+      specs: ['RTX 4060 Ti', 'Ryzen 5 7600X', '32GB DDR5', '1TB NVMe'],
+      gradient: 'from-teal-500 via-cyan-500 to-sky-500'
     }
   ];
 
   const categories = [
-    { id: 'all', name: 'Все', icon: 'Grid3x3' },
-    { id: 'Gaming', name: 'Игровые', icon: 'Gamepad2' },
-    { id: 'Creative', name: 'Творчество', icon: 'Palette' },
-    { id: 'Office', name: 'Офис', icon: 'Briefcase' },
-    { id: 'Professional', name: 'Про', icon: 'Building2' }
+    { id: 'all', name: 'Все системы', icon: 'Grid3x3' },
+    { id: 'Gaming', name: 'Gaming', icon: 'Gamepad2' },
+    { id: 'Creative', name: 'Creative', icon: 'Palette' },
+    { id: 'Office', name: 'Office', icon: 'Briefcase' },
+    { id: 'Professional', name: 'Pro', icon: 'Building2' }
   ];
 
   const filteredComputers = selectedCategory === 'all' 
@@ -156,154 +156,126 @@ const Catalog = () => {
   }, [filteredComputers]);
 
   return (
-    <div className="min-h-screen bg-background">
-      {/* Mobile Compact Nav */}
-      <nav className="fixed top-0 left-0 right-0 z-50 bg-background/95 backdrop-blur-md border-b border-border">
-        <div className="px-2 py-1.5 md:px-4 md:py-4">
+    <div className="min-h-screen bg-background relative overflow-hidden">
+      <div className="fixed inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-primary/20 via-background to-background pointer-events-none" />
+      <div className="fixed inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PHBhdHRlcm4gaWQ9ImdyaWQiIHdpZHRoPSI2MCIgaGVpZ2h0PSI2MCIgcGF0dGVyblVuaXRzPSJ1c2VyU3BhY2VPblVzZSI+PHBhdGggZD0iTSAxMCAwIEwgMCAwIDAgMTAiIGZpbGw9Im5vbmUiIHN0cm9rZT0icmdiYSgyNTUsMjU1LDI1NSwwLjAzKSIgc3Ryb2tlLXdpZHRoPSIxIi8+PC9wYXR0ZXJuPjwvZGVmcz48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSJ1cmwoI2dyaWQpIi8+PC9zdmc+')] opacity-40 pointer-events-none" />
+
+      <nav className="fixed top-0 left-0 right-0 z-50 glass border-b border-white/10">
+        <div className="container mx-auto px-6 py-5">
           <div className="flex items-center justify-between">
             <button 
               onClick={() => navigate('/')}
-              className="flex items-center gap-1 md:gap-3 hover:opacity-80 transition-opacity"
+              className="flex items-center gap-3 hover:opacity-80 transition-opacity"
             >
-              <img src="https://cdn.poehali.dev/files/1a63eeaa-f3cc-46a8-a560-65d427484deb.png" alt="WAPC Logo" className="h-7 w-7 md:h-10 md:w-10 object-contain" />
-              <span className="text-base md:text-2xl font-bold">WarpPC</span>
+              <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-primary via-secondary to-accent animate-gradient flex items-center justify-center">
+                <Icon name="Cpu" size={24} className="text-black" />
+              </div>
+              <span className="text-2xl font-bold text-gradient">WarpPC</span>
             </button>
-            <div className="flex items-center gap-1 md:gap-3">
+            <div className="flex items-center gap-3">
               <ThemeToggle />
-              <Button onClick={() => navigate('/')} variant="outline" size="sm" className="h-7 px-1.5 md:h-9 md:px-3">
-                <Icon name="Home" size={12} className="md:w-4 md:h-4" />
+              <Button onClick={() => navigate('/')} variant="outline" className="glass">
+                <Icon name="Home" size={18} className="mr-2" />
+                Главная
               </Button>
             </div>
           </div>
         </div>
       </nav>
 
-      {/* Mobile Compact Content */}
-      <div className="pt-11 md:pt-24 pb-3 md:pb-20">
-        <div className="px-2 md:px-4 max-w-7xl mx-auto">
-          {/* Mobile Compact Title */}
-          <div className="text-center mb-2 md:mb-12 animate-fade-in relative">
-            <div className="absolute inset-0 -z-10 overflow-hidden">
-              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-48 h-48 md:w-96 md:h-96 bg-primary/5 rounded-full blur-3xl animate-pulse" />
-              <div className="absolute top-1/2 left-1/4 -translate-x-1/2 -translate-y-1/2 w-32 h-32 md:w-72 md:h-72 bg-destructive/5 rounded-full blur-3xl animate-pulse" style={{animationDelay: '1s'}} />
-              <div className="absolute top-1/2 left-3/4 -translate-x-1/2 -translate-y-1/2 w-32 h-32 md:w-72 md:h-72 bg-primary/5 rounded-full blur-3xl animate-pulse" style={{animationDelay: '2s'}} />
-            </div>
-            <h1 className="text-lg md:text-6xl font-bold mb-1 md:mb-4 bg-gradient-to-r from-primary via-destructive to-primary bg-clip-text text-transparent animate-gradient bg-300">
-              Каталог
+      <div className="pt-32 pb-20">
+        <div className="container mx-auto px-6">
+          <div className="text-center mb-16 animate-fade-in">
+            <h1 className="text-6xl md:text-7xl font-bold mb-6">
+              Полный <span className="text-gradient">каталог</span>
             </h1>
-            <p className="text-xs md:text-xl text-muted-foreground hidden md:block">Все наши конфигурации компьютеров в одном месте</p>
+            <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
+              Выберите готовую конфигурацию или закажите персональную сборку
+            </p>
           </div>
 
-          {/* Mobile Compact Filters */}
-          <div className="flex gap-1 md:gap-3 overflow-x-auto pb-1.5 mb-2 md:mb-12 scrollbar-hide justify-start md:justify-center">
+          <div className="flex gap-3 overflow-x-auto pb-4 mb-12 scrollbar-hide justify-center flex-wrap">
             {categories.map((category, idx) => (
               <Button
                 key={category.id}
                 variant={selectedCategory === category.id ? 'default' : 'outline'}
                 onClick={() => setSelectedCategory(category.id)}
-                size="sm"
-                className={`button-hover animate-fade-in text-[10px] md:text-sm relative overflow-hidden group/btn h-6 px-1.5 md:h-9 md:px-4 flex-shrink-0 ${
-                  selectedCategory === category.id ? 'shadow-lg shadow-primary/50' : ''
+                size="lg"
+                className={`button-hover animate-fade-in glass ${
+                  selectedCategory === category.id ? 'neon-border' : 'border-white/20'
                 }`}
                 style={{ animationDelay: `${idx * 0.1}s` }}
               >
-                <div className="absolute inset-0 bg-gradient-to-r from-primary/0 via-primary/30 to-primary/0 translate-x-[-200%] group-hover/btn:translate-x-[200%] transition-transform duration-1000" />
-                <Icon name={category.icon} size={11} className="md:mr-2 md:w-4 md:h-4 group-hover/btn:rotate-12 transition-transform duration-300" />
-                <span className="relative hidden md:inline">{category.name}</span>
+                <Icon name={category.icon} size={20} className="mr-2" />
+                {category.name}
               </Button>
             ))}
           </div>
 
-          {/* Mobile Compact Grid */}
-          <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-1.5 md:gap-6">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {filteredComputers.map((computer, index) => (
               <Card 
-                key={`${computer.id}-${selectedCategory}`}
+                key={computer.id}
                 ref={(el) => (cardsRef.current[index] = el)}
-                className={`overflow-hidden group card-hover hover-shimmer relative border scroll-animate-card ${
-                  animateCards ? 'animate-fade-in' : 'opacity-0'
+                className={`overflow-hidden group card-hover glass neon-border ${
+                  animateCards ? 'animate-on-scroll-scale visible' : 'animate-on-scroll-scale'
                 }`}
-                style={{ 
-                  animationDelay: `${index * 0.08}s`,
-                  '--card-index': index % 4
-                } as React.CSSProperties}
+                style={{ transitionDelay: `${index * 0.1}s` }}
               >
-                <div className="absolute -top-10 -right-10 w-20 h-20 md:-top-20 md:-right-20 md:w-40 md:h-40 bg-primary/10 rounded-full blur-2xl group-hover:bg-primary/30 transition-all duration-700 animate-pulse-slow" />
-                <div className="absolute -bottom-10 -left-10 w-20 h-20 md:-bottom-20 md:-left-20 md:w-40 md:h-40 bg-destructive/10 rounded-full blur-2xl group-hover:bg-destructive/30 transition-all duration-700 animate-pulse-slow" style={{animationDelay: '1s'}} />
-                
-                {/* Mobile Compact Image */}
-                <div className="relative overflow-hidden h-20 md:h-48 bg-gradient-to-br from-muted via-background to-muted">
-                  <div className="absolute inset-0 bg-gradient-to-br from-primary/30 via-destructive/20 to-primary/30 opacity-0 group-hover:opacity-100 transition-all duration-700 animate-gradient-slow" />
-                  <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(239,68,68,0.1),transparent_50%)] opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
-                  <img 
-                    src={computer.image} 
-                    alt={computer.name}
-                    className="w-full h-full object-cover group-hover:scale-150 group-hover:rotate-6 transition-all duration-700 filter group-hover:brightness-110"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                  <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-                    <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full bg-gradient-radial from-primary/20 to-transparent blur-xl animate-pulse-glow" />
+                <div className={`relative h-64 bg-gradient-to-br ${computer.gradient} animate-gradient`}>
+                  <div className="absolute inset-0 bg-black/40 backdrop-blur-sm" />
+                  <div className="absolute inset-0 flex items-center justify-center">
+                    <Icon name="Cpu" size={100} className="text-white/20 group-hover:scale-110 transition-transform duration-500" />
                   </div>
-                  <Badge className="absolute top-1 right-1 md:top-4 md:right-4 text-[8px] md:text-sm bg-primary/90 backdrop-blur-sm shadow-lg group-hover:scale-150 group-hover:rotate-[360deg] group-hover:shadow-primary/50 transition-all duration-700 px-1 py-0 md:px-2 md:py-1">
+                  <Badge className="absolute top-4 right-4 bg-black/50 backdrop-blur-md border border-white/20 text-sm">
                     {computer.category}
                   </Badge>
-                  <div className="absolute top-1 left-1 md:top-4 md:left-4 w-6 h-6 md:w-10 md:h-10 rounded-full bg-primary/20 backdrop-blur-sm opacity-0 group-hover:opacity-100 transition-all duration-500 flex items-center justify-center group-hover:animate-bounce">
-                    <Icon name="Zap" size={12} className="text-primary animate-pulse md:w-4 md:h-4 group-hover:rotate-180 transition-transform duration-500" />
-                  </div>
                 </div>
-
-                {/* Mobile Compact Content */}
-                <CardContent className="p-1.5 md:p-6 relative">
-                  <div className="absolute top-0 left-0 w-0 h-0.5 md:h-1 bg-gradient-to-r from-primary via-destructive to-primary bg-300 group-hover:w-full transition-all duration-1000 animate-gradient" />
-                  <div className="absolute top-0 right-0 w-0.5 md:w-1 h-0 bg-gradient-to-b from-primary to-destructive group-hover:h-full transition-all duration-1000 delay-300" />
-                  
-                  {/* Mobile Compact Title */}
-                  <h3 className="text-[10px] leading-tight md:text-xl font-bold mb-1 md:mb-3 group-hover:text-primary transition-all duration-500 group-hover:translate-x-2 group-hover:scale-105 line-clamp-1">
-                    {computer.name}
-                  </h3>
-                  
-                  {/* Mobile Compact Specs */}
-                  <ul className="space-y-0 md:space-y-2 mb-1 md:mb-4">
-                    {computer.specs.slice(0, 1).map((spec, idx) => (
-                      <li 
-                        key={idx} 
-                        className="text-[8px] md:text-sm text-muted-foreground flex items-start gap-0.5 md:gap-2 opacity-60 group-hover:opacity-100 transition-all duration-300 group-hover:translate-x-1"
-                        style={{ transitionDelay: `${idx * 0.1}s` }}
-                      >
-                        <Icon name="Check" size={8} className="text-primary group-hover:scale-150 group-hover:rotate-[360deg] transition-all duration-500 flex-shrink-0 mt-0.5 md:w-3.5 md:h-3.5" />
-                        <span className="group-hover:text-foreground transition-colors duration-300 line-clamp-1">{spec}</span>
-                      </li>
-                    ))}
-                    <li className="text-[8px] md:text-sm text-muted-foreground opacity-40 md:hidden">+{computer.specs.length - 1} ещё</li>
-                    {computer.specs.slice(2).map((spec, idx) => (
-                      <li 
-                        key={idx + 2} 
-                        className="hidden md:flex text-sm text-muted-foreground items-start gap-2 opacity-60 group-hover:opacity-100 transition-all duration-300 group-hover:translate-x-2"
-                        style={{ transitionDelay: `${(idx + 2) * 0.1}s` }}
-                      >
-                        <Icon name="Check" size={14} className="text-primary group-hover:scale-150 group-hover:rotate-[360deg] transition-all duration-500 flex-shrink-0 mt-0.5" />
-                        <span className="group-hover:text-foreground transition-colors duration-300 line-clamp-1">{spec}</span>
+                
+                <CardContent className="p-8">
+                  <h3 className="text-2xl font-bold mb-6 neon-text">{computer.name}</h3>
+                  <ul className="space-y-3 mb-8">
+                    {computer.specs.map((spec, i) => (
+                      <li key={i} className="flex items-center gap-3 text-base text-muted-foreground">
+                        <div className="w-2 h-2 rounded-full bg-primary" />
+                        {spec}
                       </li>
                     ))}
                   </ul>
-                  
-                  {/* Mobile Compact Price & Button */}
-                  <div className="flex items-center justify-between pt-1 md:pt-4 border-t border-border/50 group-hover:border-primary/50 transition-colors duration-500">
-                    <span className="text-xs md:text-2xl font-bold text-primary group-hover:scale-125 md:group-hover:scale-150 transition-all duration-700 inline-block relative group-hover:rotate-3">
-                      <span className="absolute inset-0 blur-lg bg-primary/50 opacity-0 group-hover:opacity-100 transition-opacity duration-500 animate-pulse" />
-                      <span className="relative animate-gradient bg-gradient-to-r from-primary via-destructive to-primary bg-clip-text bg-300">{computer.price}</span>
-                    </span>
-                    <Button size="sm" className="button-hover group-hover:scale-125 group-hover:-rotate-3 transition-all duration-500 text-[9px] md:text-sm shadow-lg group-hover:shadow-primary/50 h-5 px-1.5 md:h-9 md:px-4">
-                      <Icon name="ShoppingCart" size={10} className="group-hover:rotate-[360deg] group-hover:scale-150 transition-all duration-700 md:mr-2 md:w-3.5 md:h-3.5" />
-                      <span className="hidden md:inline">Заказать</span>
+                  <div className="flex items-center justify-between pt-6 border-t border-white/10">
+                    <span className="text-3xl font-bold text-primary">{computer.price}</span>
+                    <Button size="lg" className="button-hover">
+                      <Icon name="ShoppingCart" size={18} className="mr-2" />
+                      Заказать
                     </Button>
                   </div>
                 </CardContent>
               </Card>
             ))}
           </div>
+
+          {filteredComputers.length === 0 && (
+            <div className="text-center py-20">
+              <Icon name="Search" size={64} className="text-muted-foreground mx-auto mb-4 opacity-50" />
+              <p className="text-xl text-muted-foreground">Компьютеры не найдены в этой категории</p>
+            </div>
+          )}
         </div>
       </div>
+
+      <footer className="py-12 px-6 border-t border-white/10 relative">
+        <div className="container mx-auto text-center">
+          <div className="flex items-center justify-center gap-3 mb-4">
+            <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-primary via-secondary to-accent animate-gradient flex items-center justify-center">
+              <Icon name="Cpu" size={18} className="text-black" />
+            </div>
+            <span className="text-xl font-bold text-gradient">WarpPC</span>
+          </div>
+          <p className="text-muted-foreground">
+            © 2025 WarpPC. Сборка компьютеров нового поколения
+          </p>
+        </div>
+      </footer>
     </div>
   );
 };
