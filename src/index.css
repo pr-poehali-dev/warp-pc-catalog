@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Rajdhani:wght@300;400;500;600;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap");
 
 @tailwind base;
 @tailwind components;
@@ -6,34 +6,21 @@
 
 @layer base {
   :root {
-    --background: 220 25% 8%;
-    --foreground: 210 20% 98%;
-
-    --card: 220 20% 12%;
-    --card-foreground: 210 20% 98%;
-
-    --popover: 220 20% 12%;
-    --popover-foreground: 210 20% 98%;
-
-    --primary: 280 100% 70%;
-    --primary-foreground: 0 0% 0%;
-
-    --secondary: 190 100% 50%;
-    --secondary-foreground: 0 0% 0%;
-
-    --muted: 220 15% 20%;
-    --muted-foreground: 220 10% 60%;
-
-    --accent: 330 100% 60%;
-    --accent-foreground: 0 0% 100%;
-
-    --destructive: 0 72% 51%;
-    --destructive-foreground: 0 0% 98%;
-
-    --border: 220 15% 25%;
-    --input: 220 15% 25%;
-    --ring: 280 100% 70%;
-
+    --background: 0 0% 100%;
+    --foreground: 240 10% 4%;
+    --card: 0 0% 100%;
+    --card-foreground: 240 10% 4%;
+    --primary: 221 83% 53%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 210 40% 96%;
+    --secondary-foreground: 240 6% 10%;
+    --muted: 210 40% 96%;
+    --muted-foreground: 240 4% 46%;
+    --accent: 210 40% 96%;
+    --accent-foreground: 240 6% 10%;
+    --border: 214 32% 91%;
+    --input: 214 32% 91%;
+    --ring: 221 83% 53%;
     --radius: 0.5rem;
   }
 }
@@ -45,135 +32,9 @@
 
   body {
     @apply bg-background text-foreground;
-    font-family: "Rajdhani", sans-serif;
-    font-weight: 500;
-  }
-
-  h1,
-  h2,
-  h3,
-  h4,
-  h5,
-  h6 {
-    font-family: "Orbitron", sans-serif;
-    font-weight: 700;
-  }
-}
-
-@layer utilities {
-  @keyframes neon-pulse {
-    0%,
-    100% {
-      text-shadow:
-        0 0 10px currentColor,
-        0 0 20px currentColor,
-        0 0 40px currentColor;
-    }
-    50% {
-      text-shadow:
-        0 0 20px currentColor,
-        0 0 40px currentColor,
-        0 0 80px currentColor;
-    }
-  }
-
-  @keyframes slide-up {
-    from {
-      opacity: 0;
-      transform: translateY(60px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-
-  @keyframes slide-in {
-    from {
-      opacity: 0;
-      transform: translateX(-40px);
-    }
-    to {
-      opacity: 1;
-      transform: translateX(0);
-    }
-  }
-
-  @keyframes rotate-border {
-    0% {
-      transform: rotate(0deg);
-    }
-    100% {
-      transform: rotate(360deg);
-    }
-  }
-
-  @keyframes scanner {
-    0% {
-      transform: translateY(-100%);
-    }
-    100% {
-      transform: translateY(100%);
-    }
-  }
-
-  .neon-text {
-    animation: neon-pulse 2s ease-in-out infinite;
-  }
-
-  .slide-up {
-    animation: slide-up 0.8s cubic-bezier(0.16, 1, 0.3, 1);
-  }
-
-  .slide-in {
-    animation: slide-in 0.8s cubic-bezier(0.16, 1, 0.3, 1);
-  }
-
-  .glass-dark {
-    background: rgba(15, 23, 42, 0.6);
-    backdrop-filter: blur(12px);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-  }
-
-  .glow-box {
-    box-shadow:
-      0 0 20px rgba(168, 85, 247, 0.4),
-      0 0 40px rgba(168, 85, 247, 0.2),
-      inset 0 0 20px rgba(168, 85, 247, 0.1);
-  }
-
-  .rotate-border::before {
-    content: "";
-    position: absolute;
-    inset: -2px;
-    background: conic-gradient(
-      from 0deg,
-      transparent,
-      hsl(var(--primary)),
-      transparent
-    );
-    border-radius: inherit;
-    animation: rotate-border 3s linear infinite;
-    z-index: -1;
-  }
-
-  .scanner-effect::after {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 100%;
-    background: linear-gradient(
-      to bottom,
-      transparent,
-      rgba(168, 85, 247, 0.3),
-      transparent
-    );
-    animation: scanner 2s ease-in-out infinite;
-  }
-
-  .hexagon {
-    clip-path: polygon(30% 0%, 70% 0%, 100% 50%, 70% 100%, 30% 100%, 0% 50%);
+    font-family:
+      "Inter",
+      -apple-system,
+      sans-serif;
   }
 }

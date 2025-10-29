@@ -1,193 +1,60 @@
-import { useState } from 'react';
 import { Button } from '@/components/ui/button';
-import { Card, CardContent } from '@/components/ui/card';
+import { Card } from '@/components/ui/card';
 import Icon from '@/components/ui/icon';
-import { ThemeToggle } from '@/components/ThemeToggle';
 import { useNavigate } from 'react-router-dom';
 
-const Catalog = () => {
+export default function Catalog() {
   const navigate = useNavigate();
-  const [filter, setFilter] = useState('all');
 
-  const products = [
-    {
-      id: 1,
-      name: 'GENESIS',
-      category: 'starter',
-      power: '15 TFLOPS',
-      price: 89990,
-      specs: ['Intel i5-13400F', 'RTX 4060 8GB', '16GB DDR4', '512GB NVMe'],
-      color: 'from-purple-600 to-pink-600'
-    },
-    {
-      id: 2,
-      name: 'GENESIS PRO',
-      category: 'starter',
-      power: '18 TFLOPS',
-      price: 109990,
-      specs: ['AMD Ryzen 5 7600X', 'RTX 4060 Ti 8GB', '32GB DDR5', '1TB NVMe'],
-      color: 'from-purple-500 to-pink-500'
-    },
-    {
-      id: 3,
-      name: 'PHANTOM',
-      category: 'mid',
-      power: '28 TFLOPS',
-      price: 149990,
-      specs: ['AMD Ryzen 7 7700X', 'RTX 4070 Ti 12GB', '32GB DDR5', '1TB NVMe'],
-      color: 'from-cyan-500 to-blue-600'
-    },
-    {
-      id: 4,
-      name: 'PHANTOM ULTRA',
-      category: 'mid',
-      power: '32 TFLOPS',
-      price: 179990,
-      specs: ['Intel i7-14700K', 'RTX 4070 Ti Super 16GB', '32GB DDR5', '2TB NVMe'],
-      color: 'from-cyan-400 to-blue-500'
-    },
-    {
-      id: 5,
-      name: 'TITAN',
-      category: 'high',
-      power: '45 TFLOPS',
-      price: 239990,
-      specs: ['Intel i9-14900K', 'RTX 4090 24GB', '64GB DDR5', '2TB NVMe'],
-      color: 'from-orange-500 to-red-600'
-    },
-    {
-      id: 6,
-      name: 'TITAN APEX',
-      category: 'high',
-      power: '50 TFLOPS',
-      price: 289990,
-      specs: ['Intel i9-14900KS', 'RTX 4090 24GB', '128GB DDR5', '4TB NVMe'],
-      color: 'from-orange-400 to-red-500'
-    }
+  const allProducts = [
+    { name: 'Starter PC', price: '₽65,000', cpu: 'i5-12400F', gpu: 'RTX 3060', ram: '16GB' },
+    { name: 'Office PC', price: '₽45,000', cpu: 'i3-12100', gpu: 'Intel UHD', ram: '8GB' },
+    { name: 'Gaming PC', price: '₽120,000', cpu: 'i7-13700K', gpu: 'RTX 4070', ram: '32GB' },
+    { name: 'Gaming Pro', price: '₽160,000', cpu: 'i9-13900K', gpu: 'RTX 4080', ram: '32GB' },
+    { name: 'Pro PC', price: '₽200,000', cpu: 'i9-13900K', gpu: 'RTX 4090', ram: '64GB' },
+    { name: 'Workstation', price: '₽250,000', cpu: 'Xeon W', gpu: 'RTX A5000', ram: '128GB' }
   ];
-
-  const categories = [
-    { id: 'all', label: 'ВСЕ СИСТЕМЫ', icon: 'Grid3x3' },
-    { id: 'starter', label: 'СТАРТ', icon: 'Zap' },
-    { id: 'mid', label: 'СРЕДНИЙ', icon: 'TrendingUp' },
-    { id: 'high', label: 'ПРЕМИУМ', icon: 'Award' }
-  ];
-
-  const filtered = filter === 'all' ? products : products.filter(p => p.category === filter);
 
   return (
-    <div className="min-h-screen bg-background text-foreground">
-      <div className="fixed inset-0 bg-[linear-gradient(to_right,#1e293b_1px,transparent_1px),linear-gradient(to_bottom,#1e293b_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_80%_50%_at_50%_0%,#000,transparent)]" />
-
-      <nav className="fixed top-0 w-full z-50 glass-dark border-b border-primary/20">
-        <div className="container mx-auto px-6 py-4 flex items-center justify-between">
-          <button 
-            onClick={() => navigate('/')}
-            className="flex items-center gap-3 hover:opacity-80 transition-opacity"
-          >
-            <div className="w-10 h-10 bg-gradient-to-br from-primary to-accent rounded-lg flex items-center justify-center">
-              <Icon name="Zap" className="text-black" size={24} />
-            </div>
-            <h1 className="text-2xl font-bold tracking-wider">WARP<span className="text-primary">PC</span></h1>
+    <div className="min-h-screen">
+      <header className="border-b">
+        <div className="container mx-auto px-4 py-4 flex justify-between items-center">
+          <button onClick={() => navigate('/')} className="flex items-center gap-2">
+            <Icon name="Cpu" size={28} className="text-primary" />
+            <span className="text-2xl font-bold">TechBuild</span>
           </button>
-          <div className="flex items-center gap-4">
-            <ThemeToggle />
-            <Button onClick={() => navigate('/')} variant="outline" className="border-primary/50 hover:bg-primary/10">
-              <Icon name="Home" size={16} className="mr-2" />
-              ГЛАВНАЯ
-            </Button>
-          </div>
+          <Button onClick={() => navigate('/')} variant="outline">
+            <Icon name="Home" className="mr-2" size={18} />
+            Главная
+          </Button>
         </div>
-      </nav>
+      </header>
 
-      <div className="relative pt-32 pb-20 px-6">
-        <div className="container mx-auto">
-          <div className="text-center mb-16 slide-up">
-            <h1 className="text-6xl md:text-8xl font-black mb-6">
-              ПОЛНЫЙ <span className="text-primary neon-text">КАТАЛОГ</span>
-            </h1>
-            <p className="text-xl text-muted-foreground">Все наши системы в одном месте</p>
-          </div>
+      <section className="container mx-auto px-4 py-16">
+        <h1 className="text-5xl font-black text-center mb-4">Каталог</h1>
+        <p className="text-center text-muted-foreground mb-12">Все наши конфигурации</p>
 
-          <div className="flex flex-wrap justify-center gap-4 mb-16">
-            {categories.map((cat) => (
-              <Button
-                key={cat.id}
-                onClick={() => setFilter(cat.id)}
-                variant={filter === cat.id ? 'default' : 'outline'}
-                className={`font-bold tracking-wider ${
-                  filter === cat.id 
-                    ? 'bg-primary hover:bg-primary/90 text-black glow-box' 
-                    : 'border-primary/50 hover:bg-primary/10'
-                }`}
-              >
-                <Icon name={cat.icon} size={18} className="mr-2" />
-                {cat.label}
-              </Button>
-            ))}
-          </div>
-
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
-            {filtered.map((product, idx) => (
-              <Card 
-                key={product.id}
-                className="relative overflow-hidden group hover:scale-105 transition-all duration-500 glass-dark border-2 border-primary/30 hover:border-primary"
-                style={{ animationDelay: `${idx * 0.1}s` }}
-              >
-                <div className={`absolute inset-0 bg-gradient-to-br ${product.color} opacity-10 group-hover:opacity-20 transition-opacity`} />
-                
-                <CardContent className="relative p-8">
-                  <div className="mb-6">
-                    <h3 className="text-3xl font-black mb-2 tracking-wider">{product.name}</h3>
-                    <div className="flex items-center gap-2 text-primary text-sm font-bold">
-                      <Icon name="Cpu" size={16} />
-                      <span>{product.power}</span>
-                    </div>
-                  </div>
-
-                  <div className="space-y-3 mb-6">
-                    {product.specs.map((spec, i) => (
-                      <div key={i} className="flex items-center gap-3 text-muted-foreground">
-                        <div className="w-1 h-1 bg-primary rounded-full" />
-                        <span className="text-sm">{spec}</span>
-                      </div>
-                    ))}
-                  </div>
-
-                  <div className="pt-6 border-t border-primary/20">
-                    <div className="text-3xl font-black text-primary mb-4">
-                      {product.price.toLocaleString('ru')} ₽
-                    </div>
-                    <Button className="w-full bg-primary hover:bg-primary/90 text-black font-bold h-12">
-                      <Icon name="ShoppingCart" size={18} className="mr-2" />
-                      ЗАКАЗАТЬ
-                    </Button>
-                  </div>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-        </div>
-      </div>
-
-      <footer className="relative py-12 px-6 border-t border-primary/20">
-        <div className="container mx-auto">
-          <div className="flex flex-col md:flex-row items-center justify-between gap-6">
-            <div className="flex items-center gap-3">
-              <div className="w-8 h-8 bg-gradient-to-br from-primary to-accent rounded-lg flex items-center justify-center">
-                <Icon name="Zap" className="text-black" size={18} />
+        <div className="grid md:grid-cols-3 gap-8">
+          {allProducts.map((pc) => (
+            <Card key={pc.name} className="p-6 hover:shadow-xl transition-shadow">
+              <h3 className="text-2xl font-bold mb-4">{pc.name}</h3>
+              <div className="space-y-2 mb-6 text-muted-foreground">
+                <p>CPU: {pc.cpu}</p>
+                <p>GPU: {pc.gpu}</p>
+                <p>RAM: {pc.ram}</p>
               </div>
-              <span className="text-xl font-bold tracking-wider">WARP<span className="text-primary">PC</span></span>
-            </div>
-            
-            <div className="text-sm text-muted-foreground">
-              © 2025 WarpPC. Все права защищены.
-            </div>
-          </div>
+              <div className="text-3xl font-bold text-primary mb-4">{pc.price}</div>
+              <Button className="w-full">Заказать</Button>
+            </Card>
+          ))}
+        </div>
+      </section>
+
+      <footer className="border-t py-8">
+        <div className="container mx-auto px-4 text-center text-muted-foreground">
+          <p>© 2025 TechBuild. Сборка компьютеров на заказ</p>
         </div>
       </footer>
     </div>
   );
-};
-
-export default Catalog;
+}
